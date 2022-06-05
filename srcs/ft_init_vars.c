@@ -1,27 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_init_vars.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hel-makh <hel-makh@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/06/05 11:49:49 by hel-makh          #+#    #+#             */
-/*   Updated: 2022/06/05 20:09:36 by hel-makh         ###   ########.fr       */
+/*   Created: 2022/06/05 14:00:29 by hel-makh          #+#    #+#             */
+/*   Updated: 2022/06/05 18:09:39 by hel-makh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/cub3d.h"
+#include "../includes/cub3d.h"
 
-int	main(int argc, char **argv)
+static void	ft_init_map(t_map *map)
 {
-	t_vars	vars;
-	
-	if (argc < 2)
-		return (printf("Error\nMissing map file.\n%s\n", USAGE), EXIT_FAILURE);
-	else if (argc > 2)
-		return (printf("Error\nInvalid arguments.\n%s\n", USAGE), EXIT_FAILURE);
-	ft_init_vars(&vars);
-	if (!ft_import_map(&vars.map, argv[1]))
-		return (EXIT_FAILURE);
-	return (EXIT_SUCCESS);
+	map->map = NULL;
+	map->ceilling[0] = -1;
+	map->ceilling[1] = -1;
+	map->ceilling[2] = -1;
+	map->floor[0] = -1;
+	map->floor[1] = -1;
+	map->floor[2] = -1;
+	map->north = NULL;
+	map->south = NULL;
+	map->west = NULL;
+	map->east = NULL;
+}
+
+void	ft_init_vars(t_vars *vars)
+{
+	ft_init_map(&vars->map);
 }

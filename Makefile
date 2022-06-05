@@ -4,7 +4,9 @@ NAME			=	cub3d
 
 MAIN			=	main.c
 
-SRCS			=	
+SRCS			=	srcs/ft_init_vars.c\
+					srcs/ft_import_map.c\
+					srcs/ft_parse_textures.c
 
 OBJS			=	$(SRCS:.c=.o)\
 					$(MAIN:.c=.o)
@@ -13,7 +15,7 @@ CC				=	cc
 
 CFLAGS			=	-Wall -Wextra -Werror
 
-LIBXFLAGS		=	-Lmlx -lmlx -framework OpenGL -framework AppKit
+LIBXFLAGS		=	-lmlx -framework OpenGL -framework AppKit
 
 LIBFT_DIR		=	./Libft
 
@@ -30,15 +32,15 @@ $(NAME):		$(HEADER) $(LIBFT) $(OBJS)
 all:			$(NAME)
 
 $(LIBFT):
-				make -C $(LIBFT_DIR)
+				# make -C $(LIBFT_DIR)
 
 clean:
 				$(RM) $(OBJS)
-				make clean -C $(LIBFT_DIR)
+				# make clean -C $(LIBFT_DIR)
 
 fclean:			clean
 				$(RM) $(NAME)
-				make fclean -C $(LIBFT_DIR)
+				# make fclean -C $(LIBFT_DIR)
 
 re:				fclean all
 
