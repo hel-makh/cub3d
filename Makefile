@@ -15,7 +15,7 @@ CC				=	cc
 
 CFLAGS			=	-Wall -Wextra -Werror
 
-LIBXFLAGS		=	-lmlx -framework OpenGL -framework AppKit
+# LIBXFLAGS		=	-lmlx -framework OpenGL -framework AppKit
 
 LIBFT_DIR		=	./Libft
 
@@ -27,7 +27,10 @@ RM				=	rm -f
 				$(CC) $(CFLAGS) -Imlx -c $< -o $@ 
 
 $(NAME):		$(HEADER) $(LIBFT) $(OBJS)
-				$(CC) $(CFLAGS) $(LIBXFLAGS) $(LIBFT) $(OBJS) -o $(NAME)
+				$(CC) $(CFLAGS) $(LIBFT) $(OBJS) -o $(NAME)
+
+# $(NAME):		$(HEADER) $(LIBFT) $(OBJS)
+# 				$(CC) $(CFLAGS) $(LIBXFLAGS) $(LIBFT) $(OBJS) -o $(NAME)
 
 all:			$(NAME)
 

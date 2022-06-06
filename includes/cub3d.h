@@ -18,7 +18,7 @@
 # include <stdio.h>
 # include <fcntl.h>
 # include <math.h>
-# include <mlx.h>
+// # include <mlx.h>
 # include "../Libft/libft.h"
 
 # define USAGE "Usage: ./cub3d <file.cub>"

@@ -6,7 +6,7 @@
 /*   By: hel-makh <hel-makh@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/05 19:04:43 by hel-makh          #+#    #+#             */
-/*   Updated: 2022/06/05 20:19:43 by hel-makh         ###   ########.fr       */
+/*   Updated: 2022/06/06 14:07:33 by hel-makh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,13 +45,13 @@ static int	ft_get_rgb_colors(int rgb[3], char **info)
 	char	**arr;
 
 	arr = ft_split(info[1], ',');
-	(rgb)[0] = ft_atoi(arr[0]);
-	(rgb)[1] = ft_atoi(arr[1]);
-	(rgb)[2] = ft_atoi(arr[2]);
+	rgb[0] = ft_atoi(arr[0]);
+	rgb[1] = ft_atoi(arr[1]);
+	rgb[2] = ft_atoi(arr[2]);
 	arr = ft_free(arr);
-	if ((rgb)[0] < 0 || (rgb)[0] > 255
-		|| (rgb)[1] < 0 || (rgb)[1] > 255
-		|| (rgb)[2] < 0 || (rgb)[2] > 255)
+	if (rgb[0] < 0 || rgb[0] > 255
+		|| rgb[1] < 0 || rgb[1] > 255
+		|| rgb[2] < 0 || rgb[2] > 255)
 		return (printf("Error\nInvalid RGB combination.\n"), 0);
 	return (1);
 }
@@ -86,10 +86,12 @@ int	ft_parse_textures(t_map *map, int fd)
 	char	*line;
 	char	**info;
 
-	line = get_next_line(fd);
-	while (line)
+	while (!ft_is_parsed(map))
 	{
-		if (ft_strcmp(line, "\n"))
+		line = get_next_line(fd);
+		if (!line)
+			return (printf("Error\nMissing textures.\n"), 0);
+		if (*line)
 		{
 			info = ft_split(line, ' ');
 			if (ft_arrlen(info) != 2)
@@ -99,9 +101,6 @@ int	ft_parse_textures(t_map *map, int fd)
 			info = ft_free_2d(info);
 		}
 		line = ft_free(line);
-		if (ft_is_parsed(map))
-			break ;
-		line = get_next_line(fd);
 	}
 	return (1);
 }
