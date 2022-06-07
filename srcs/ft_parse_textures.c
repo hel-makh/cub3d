@@ -6,7 +6,7 @@
 /*   By: hel-makh <hel-makh@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/05 19:04:43 by hel-makh          #+#    #+#             */
-/*   Updated: 2022/06/06 14:07:33 by hel-makh         ###   ########.fr       */
+/*   Updated: 2022/06/07 13:46:14 by hel-makh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,10 @@ static int	ft_get_rgb_colors(int rgb[3], char **info)
 	char	**arr;
 
 	arr = ft_split(info[1], ',');
+	if (ft_arrlen(arr) != 3)
+		return (printf("Error\nInvalid RGB format.\n"), ft_free(arr), 0);
+	if (!ft_isnumber(arr[0]) || !ft_isnumber(arr[1]) || !ft_isnumber(arr[2]))
+		return (printf("Error\nInvalid RGB values.\n"), ft_free(arr), 0);
 	rgb[0] = ft_atoi(arr[0]);
 	rgb[1] = ft_atoi(arr[1]);
 	rgb[2] = ft_atoi(arr[2]);
@@ -58,8 +62,6 @@ static int	ft_get_rgb_colors(int rgb[3], char **info)
 
 static int	ft_get_textures(t_map *map, char **info)
 {
-	if (ft_is_duplicated(map, info))
-		return (printf("Error\nDuplicated textures.\n"), 0);
 	if (!ft_strcmp(info[0], "NO"))
 		map->north = ft_strdup(info[1]);
 	else if (!ft_strcmp(info[0], "SO"))
@@ -78,6 +80,8 @@ static int	ft_get_textures(t_map *map, char **info)
 		if (!ft_get_rgb_colors(map->ceilling, info))
 			return (0);
 	}
+	else
+		return (printf("Error\nInvalid texture information.\n"), 0);
 	return (1);
 }
 
@@ -96,6 +100,8 @@ int	ft_parse_textures(t_map *map, int fd)
 			info = ft_split(line, ' ');
 			if (ft_arrlen(info) != 2)
 				return (printf("Error\nInvalid texture format.\n"), 0);
+			if (ft_is_duplicated(map, info))
+				return (printf("Error\nDuplicated textures.\n"), 0);
 			if (!ft_get_textures(map, info))
 				return (0);
 			info = ft_free_2d(info);
