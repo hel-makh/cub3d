@@ -6,7 +6,7 @@
 /*   By: hel-makh <hel-makh@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/05 11:43:14 by hel-makh          #+#    #+#             */
-/*   Updated: 2022/06/05 20:09:34 by hel-makh         ###   ########.fr       */
+/*   Updated: 2022/06/07 15:31:41 by hel-makh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,5 +40,6 @@ typedef struct s_vars {
 void	ft_init_vars(t_vars *vars);
 int		ft_import_map(t_map *map, char *file);
 int		ft_parse_textures(t_map *map, int fd);
+int		ft_parse_map(t_map *map, int fd);
 
 #endif

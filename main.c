@@ -6,7 +6,7 @@
 /*   By: hel-makh <hel-makh@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/05 11:49:49 by hel-makh          #+#    #+#             */
-/*   Updated: 2022/06/06 16:10:54 by hel-makh         ###   ########.fr       */
+/*   Updated: 2022/06/07 16:12:41 by hel-makh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 void	print_info(t_vars vars)
 {
+	printf("\n> textures:\n");
 	printf("north: '%s'\n", vars.map.north);
 	printf("south: '%s'\n", vars.map.south);
 	printf("west: '%s'\n", vars.map.west);
@@ -24,6 +25,10 @@ void	print_info(t_vars vars)
 	printf("ceilling: %d,%d,%d\n",	vars.map.ceilling[0],
 									vars.map.ceilling[1],
 									vars.map.ceilling[2]);
+
+	printf("\n> map:\n");
+	for (size_t i = 0; i < ft_arrlen(vars.map.map); i++)
+		printf("%s\n", vars.map.map[i]);
 }
 
 int	main(int argc, char **argv)
