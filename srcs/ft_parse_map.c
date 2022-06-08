@@ -6,7 +6,7 @@
 /*   By: hel-makh <hel-makh@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/07 13:48:05 by hel-makh          #+#    #+#             */
-/*   Updated: 2022/06/08 16:59:23 by hel-makh         ###   ########.fr       */
+/*   Updated: 2022/06/08 17:05:03 by hel-makh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,5 @@ int	ft_parse_map(t_map *map, int fd)
 		return (0);
 	if (!ft_is_map_closed(map))
 		return (0);
-	printf("hh\n");
 	return (1);
 }
