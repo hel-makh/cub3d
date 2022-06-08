@@ -6,7 +6,7 @@
 /*   By: hel-makh <hel-makh@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/08 15:06:14 by hel-makh          #+#    #+#             */
-/*   Updated: 2022/06/08 17:22:23 by hel-makh         ###   ########.fr       */
+/*   Updated: 2022/06/08 17:24:25 by hel-makh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ int	ft_component_surroundings(char **map, int i, int j)
 	{
 		if (!ft_check_surroundings(map, i, j))
 		{
-			if (if (map[i][j] == '0'))
+			if (map[i][j] == '0')
 				printf("Error\nInvalid map: misplaced [%c] empty space(s)."
 					"\nLine: %d, Column: %d\n", map[i][j], i + 1, j + 1);
 			else
