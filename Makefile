@@ -7,7 +7,8 @@ MAIN			=	main.c
 SRCS			=	srcs/ft_init_vars.c\
 					srcs/ft_import_map.c\
 					srcs/ft_parse_textures.c\
-					srcs/ft_parse_map.c
+					srcs/ft_parse_map.c\
+					srcs/ft_component_surroundings.c
 
 OBJS			=	$(SRCS:.c=.o)\
 					$(MAIN:.c=.o)

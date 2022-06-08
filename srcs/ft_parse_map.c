@@ -6,7 +6,7 @@
 /*   By: hel-makh <hel-makh@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/07 13:48:05 by hel-makh          #+#    #+#             */
-/*   Updated: 2022/06/07 17:11:25 by hel-makh         ###   ########.fr       */
+/*   Updated: 2022/06/08 16:59:23 by hel-makh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static int	ft_read_map(t_map *map, int fd)
 		if (*line)
 		{
 			if (ft_arrlen(map->map) && empty_line)
-				return (printf("Error\nSeparated map."), ft_free(line), 0);
+				return (printf("Error\nInvalid map.\n"), ft_free(line), 0);
 			map->map = ft_add_str2arr(map->map, line);
 			if (map->map == NULL)
 				return (ft_free(line), 0);
@@ -54,8 +54,32 @@ static int	ft_check_map_content(t_map *map)
 		{
 			if (!ft_strchr(" 01NSEW", map->map[i][j]))
 			{
-				printf("Error\nInvalid component: '%c'.\n", map->map[i][j]);
+				printf("Error\nInvalid map: Invalid component [%c]."
+					"\nLine: %d, Column: %d\n", map->map[i][j], i + 1, j + 1);
 				return (0);
+			}
+			j ++;
+		}
+		i ++;
+	}
+	return (1);
+}
+
+static int	ft_is_map_closed(t_map *map)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while (map->map[i])
+	{
+		j = 0;
+		while (map->map[i][j])
+		{
+			if (ft_strchr(" 0NSEW", map->map[i][j]))
+			{
+				if (!ft_component_surroundings(map->map, i, j))
+					return (0);
 			}
 			j ++;
 		}
@@ -68,7 +92,12 @@ int	ft_parse_map(t_map *map, int fd)
 {
 	if (!ft_read_map(map, fd))
 		return (0);
+	if (!ft_arrlen(map->map))
+		return (printf("Error\nInvalid map.\n"), 0);
 	if (!ft_check_map_content(map))
 		return (0);
+	if (!ft_is_map_closed(map))
+		return (0);
+	printf("hh\n");
 	return (1);
 }
