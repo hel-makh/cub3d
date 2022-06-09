@@ -6,7 +6,7 @@
 /*   By: hel-makh <hel-makh@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/05 19:04:43 by hel-makh          #+#    #+#             */
-/*   Updated: 2022/06/07 13:46:14 by hel-makh         ###   ########.fr       */
+/*   Updated: 2022/06/09 12:04:51 by hel-makh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,10 @@ static int	ft_get_textures(t_map *map, char **info)
 			return (0);
 	}
 	else
-		return (printf("Error\nInvalid texture information.\n"), 0);
+	{
+		printf("Error\nInvalid texture information [%s].\n", info[0]);
+		return (0);
+	}
 	return (1);
 }
 
@@ -101,7 +104,7 @@ int	ft_parse_textures(t_map *map, int fd)
 			if (ft_arrlen(info) != 2)
 				return (printf("Error\nInvalid texture format.\n"), 0);
 			if (ft_is_duplicated(map, info))
-				return (printf("Error\nDuplicated textures.\n"), 0);
+				return (printf("Error\nDuplicated textures [%s].\n", info[0]), 0);
 			if (!ft_get_textures(map, info))
 				return (0);
 			info = ft_free_2d(info);
