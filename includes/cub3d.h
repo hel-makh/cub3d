@@ -6,7 +6,7 @@
 /*   By: hel-makh <hel-makh@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/05 11:43:14 by hel-makh          #+#    #+#             */
-/*   Updated: 2022/06/08 15:08:17 by hel-makh         ###   ########.fr       */
+/*   Updated: 2022/06/20 18:25:19 by hel-makh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 # include <stdio.h>
 # include <fcntl.h>
 # include <math.h>
-// # include <mlx.h>
+# include <mlx.h>
 # include "../Libft/libft.h"
 
 # define USAGE "Usage: ./cub3d <file.cub>"
