@@ -6,7 +6,7 @@
 /*   By: hel-makh <hel-makh@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/05 19:04:43 by hel-makh          #+#    #+#             */
-/*   Updated: 2022/06/21 13:14:56 by hel-makh         ###   ########.fr       */
+/*   Updated: 2022/06/21 13:22:01 by hel-makh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 static int	ft_is_parsed(t_map *map)
 {
 	if (map->north && map->south && map->west && map->east
-		&& map->floor_color != -1 && map->ceilling_color != -1)
+		&& map->fl_color != -1 && map->ce_color != -1)
 		return (1);
 	return (0);
 }
@@ -26,10 +26,8 @@ static int	ft_is_duplicated(t_map *map, char **info)
 		|| (!ft_strcmp(info[0], "SO") && map->south)
 		|| (!ft_strcmp(info[0], "WE") && map->west)
 		|| (!ft_strcmp(info[0], "EA") && map->east)
-		|| (!ft_strcmp(info[0], "F")
-			&& map->floor_color != -1)
-		|| (!ft_strcmp(info[0], "C")
-			&& map->ceilling_color != -1))
+		|| (!ft_strcmp(info[0], "F") && map->fl_color != -1)
+		|| (!ft_strcmp(info[0], "C") && map->ce_color != -1))
 		return (1);
 	return (0);
 }
@@ -68,12 +66,12 @@ static int	ft_get_textures(t_map *map, char **info)
 		map->east = ft_strdup(info[1]);
 	else if (!ft_strcmp(info[0], "F"))
 	{
-		if (!ft_get_rgb_colors(&map->floor_color, info))
+		if (!ft_get_rgb_colors(&map->fl_color, info))
 			return (0);
 	}
 	else if (!ft_strcmp(info[0], "C"))
 	{
-		if (!ft_get_rgb_colors(&map->ceilling_color, info))
+		if (!ft_get_rgb_colors(&map->ce_color, info))
 			return (0);
 	}
 	else

@@ -6,7 +6,7 @@
 /*   By: hel-makh <hel-makh@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/05 14:03:39 by hel-makh          #+#    #+#             */
-/*   Updated: 2022/06/21 13:08:42 by hel-makh         ###   ########.fr       */
+/*   Updated: 2022/06/21 13:22:24 by hel-makh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 static void	ft_init_map(t_map *map)
 {
 	map->map = NULL;
-	map->ceilling_color = -1;
-	map->floor_color = -1;
+	map->ce_color = -1;
+	map->fl_color = -1;
 	map->north = NULL;
 	map->south = NULL;
 	map->west = NULL;
