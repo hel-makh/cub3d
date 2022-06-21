@@ -6,11 +6,22 @@
 /*   By: hel-makh <hel-makh@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/05 14:03:39 by hel-makh          #+#    #+#             */
-/*   Updated: 2022/06/07 15:51:35 by hel-makh         ###   ########.fr       */
+/*   Updated: 2022/06/21 13:08:42 by hel-makh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
+
+static void	ft_init_map(t_map *map)
+{
+	map->map = NULL;
+	map->ceilling_color = -1;
+	map->floor_color = -1;
+	map->north = NULL;
+	map->south = NULL;
+	map->west = NULL;
+	map->east = NULL;
+}
 
 static int	ft_open_map(char *file)
 {
@@ -30,7 +41,7 @@ int	ft_import_map(t_map *map, char *file)
 {
 	int		fd;
 
-	(void)map;
+	ft_init_map(map);
 	fd = ft_open_map(file);
 	if (fd == -1)
 		return (0);

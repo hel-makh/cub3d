@@ -6,7 +6,7 @@
 /*   By: hel-makh <hel-makh@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/05 19:04:43 by hel-makh          #+#    #+#             */
-/*   Updated: 2022/06/09 12:04:51 by hel-makh         ###   ########.fr       */
+/*   Updated: 2022/06/21 13:14:56 by hel-makh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,7 @@
 static int	ft_is_parsed(t_map *map)
 {
 	if (map->north && map->south && map->west && map->east
-		&& map->floor[0] != -1 && map->floor[1] != -1 && map->floor[2] != -1
-		&& map->ceilling[0] != -1 && map->ceilling[1] != -1
-		&& map->ceilling[2] != -1)
+		&& map->floor_color != -1 && map->ceilling_color != -1)
 		return (1);
 	return (0);
 }
@@ -29,20 +27,17 @@ static int	ft_is_duplicated(t_map *map, char **info)
 		|| (!ft_strcmp(info[0], "WE") && map->west)
 		|| (!ft_strcmp(info[0], "EA") && map->east)
 		|| (!ft_strcmp(info[0], "F")
-			&& map->floor[0] != -1
-			&& map->floor[1] != -1
-			&& map->floor[2] != -1)
+			&& map->floor_color != -1)
 		|| (!ft_strcmp(info[0], "C")
-			&& map->ceilling[0] != -1
-			&& map->ceilling[1] != -1
-			&& map->ceilling[2] != -1))
+			&& map->ceilling_color != -1))
 		return (1);
 	return (0);
 }
 
-static int	ft_get_rgb_colors(int rgb[3], char **info)
+static int	ft_get_rgb_colors(int *color, char **info)
 {
 	char	**arr;
+	int		rgb[3];
 
 	arr = ft_split(info[1], ',');
 	if (ft_arrlen(arr) != 3)
@@ -57,6 +52,7 @@ static int	ft_get_rgb_colors(int rgb[3], char **info)
 		|| rgb[1] < 0 || rgb[1] > 255
 		|| rgb[2] < 0 || rgb[2] > 255)
 		return (printf("Error\nInvalid RGB combination.\n"), 0);
+	*color = ft_create_trgb(0, rgb[0], rgb[1], rgb[2]);
 	return (1);
 }
 
@@ -72,12 +68,12 @@ static int	ft_get_textures(t_map *map, char **info)
 		map->east = ft_strdup(info[1]);
 	else if (!ft_strcmp(info[0], "F"))
 	{
-		if (!ft_get_rgb_colors(map->floor, info))
+		if (!ft_get_rgb_colors(&map->floor_color, info))
 			return (0);
 	}
 	else if (!ft_strcmp(info[0], "C"))
 	{
-		if (!ft_get_rgb_colors(map->ceilling, info))
+		if (!ft_get_rgb_colors(&map->ceilling_color, info))
 			return (0);
 	}
 	else
