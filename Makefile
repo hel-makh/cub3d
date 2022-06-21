@@ -4,11 +4,15 @@ NAME			=	cub3d
 
 MAIN			=	main.c
 
-SRCS			=	srcs/ft_init_vars.c\
+SRCS			=	srcs/ft_create_trgb.c\
 					srcs/ft_import_map.c\
 					srcs/ft_parse_textures.c\
 					srcs/ft_parse_map.c\
-					srcs/ft_component_surroundings.c
+					srcs/ft_component_surroundings.c\
+					srcs/ft_get_player_position.c\
+					srcs/ft_loop_hook.c\
+					srcs/ft_render_minimap.c\
+					srcs/ft_player_movement.c
 
 OBJS			=	$(SRCS:.c=.o)\
 					$(MAIN:.c=.o)
@@ -24,12 +28,12 @@ ifeq ($(UNAME_S), Darwin)
 endif
 ifeq ($(UNAME_S), Linux)
 	MLX_IFLAGS	+=	-I/usr/include -Imlx_linux -O3
-	MLX_LFLAGS	+=	-Lmlx_linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz
+	MLX_LFLAGS	+=	-Lmlx_linux -lmlx_Linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz
 endif
 
 LIBFT_DIR		=	./Libft
 
-LIBFT			=	./Libft/libft.a
+LIBFT			=	${LIBFT_DIR}/libft.a
 
 RM				=	rm -f
 

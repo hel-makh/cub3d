@@ -6,7 +6,7 @@
 /*   By: hel-makh <hel-makh@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/05 11:43:14 by hel-makh          #+#    #+#             */
-/*   Updated: 2022/06/20 18:25:19 by hel-makh         ###   ########.fr       */
+/*   Updated: 2022/06/21 23:30:13 by hel-makh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,56 @@
 
 # define USAGE "Usage: ./cub3d <file.cub>"
 
+enum e_window_res {
+	WIDTH = 640,
+	HEIGHT = 480
+};
+
+enum e_minimap {
+	BORDER = 10,
+	RADIUS = 225,
+	SIDE_LEN = (RADIUS * 2) / 10,
+	PL_RADIUS = 2
+};
+
+enum e_keycodes {
+	KEY_ESC = 65307,
+	KEY_A = 97,
+	KEY_W = 119,
+	KEY_S = 115,
+	KEY_D = 100
+};
+
+typedef struct s_circle {
+	double	x;
+	double	y;
+	double	radius;
+}	t_circle;
+
+typedef struct s_coor {
+	double	x;
+	double	y;
+}	t_coor;
+
+typedef struct s_player {
+	t_coor	pos;
+	t_coor	dir;
+	t_coor	move;
+	t_coor	rotate;
+}	t_player;
+
+typedef struct s_img {
+	void	*img;
+	int		*data;
+	int		bpp;
+	int		line_length;
+	int		endian;
+}	t_img;
+
 typedef struct s_map {
 	char	**map;
-	int		ceilling[3];
-	int		floor[3];
+	int		ce_color;
+	int		fl_color;
 	char	*north;
 	char	*south;
 	char	*west;
@@ -34,13 +80,24 @@ typedef struct s_map {
 }	t_map;
 
 typedef struct s_vars {
-	t_map	map;
+	void		*mlx;
+	void		*mlx_win;
+	t_map		map;
+	t_img		window;
+	t_player	player;
 }	t_vars;
 
-void	ft_init_vars(t_vars *vars);
+int		ft_create_trgb(int t, int r, int g, int b);
+
 int		ft_import_map(t_map *map, char *file);
 int		ft_parse_textures(t_map *map, int fd);
 int		ft_parse_map(t_map *map, int fd);
 int		ft_component_surroundings(char **map, int i, int j);
+void	ft_get_player_position(t_vars *vars);
+int		ft_loop_hook(t_vars *vars);
+void	ft_render_minimap(t_vars *vars);
+void	ft_move_player(t_vars *vars);
+int		key_press(int keycode, t_vars *vars);
+int		key_release(int keycode, t_vars *vars);
 
 #endif
