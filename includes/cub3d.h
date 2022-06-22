@@ -6,7 +6,7 @@
 /*   By: hel-makh <hel-makh@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/05 11:43:14 by hel-makh          #+#    #+#             */
-/*   Updated: 2022/06/21 23:30:13 by hel-makh         ###   ########.fr       */
+/*   Updated: 2022/06/22 18:16:21 by hel-makh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,9 @@
 # include <mlx.h>
 # include "../Libft/libft.h"
 
-# define USAGE "Usage: ./cub3d <file.cub>"
+# define USAGE	"Usage: ./cub3d <file.cub>"
+
+# define PI	3.141592653589793238
 
 enum e_window_res {
 	WIDTH = 640,
@@ -32,15 +34,19 @@ enum e_minimap {
 	BORDER = 10,
 	RADIUS = 225,
 	SIDE_LEN = (RADIUS * 2) / 10,
-	PL_RADIUS = 2
+	PL_RADIUS = 4
 };
 
 enum e_keycodes {
 	KEY_ESC = 65307,
 	KEY_A = 97,
 	KEY_W = 119,
+	KEY_D = 100,
 	KEY_S = 115,
-	KEY_D = 100
+	KEY_LEFT = 65361,
+	KEY_UP = 65362,
+	KEY_RIGHT = 65363,
+	KEY_DOWN = 65364
 };
 
 typedef struct s_circle {
@@ -56,9 +62,10 @@ typedef struct s_coor {
 
 typedef struct s_player {
 	t_coor	pos;
+	double	angle;
 	t_coor	dir;
 	t_coor	move;
-	t_coor	rotate;
+	double	rotate;
 }	t_player;
 
 typedef struct s_img {

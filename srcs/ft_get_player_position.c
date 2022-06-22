@@ -6,29 +6,27 @@
 /*   By: hel-makh <hel-makh@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/21 10:41:39 by hel-makh          #+#    #+#             */
-/*   Updated: 2022/06/21 21:31:14 by hel-makh         ###   ########.fr       */
+/*   Updated: 2022/06/22 15:39:50 by hel-makh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
-static void	ft_get_player_direction(t_vars *vars)
+static void	ft_get_player_angle(t_vars *vars)
 {
-	int	x;
-	int	y;
+	int		x;
+	int		y;
 
 	x = vars->player.pos.x;
 	y = vars->player.pos.y;
-	vars->player.dir.x = x;
-	vars->player.dir.y = y;
 	if (vars->map.map[y][x] == 'N')
-		vars->player.dir.y = 0;
+		vars->player.angle = PI / 2;
 	else if (vars->map.map[y][x] == 'S')
-		vars->player.dir.y = ft_arrlen(vars->map.map);
+		vars->player.angle = (3 * PI) / 2;
 	else if (vars->map.map[y][x] == 'E')
-		vars->player.dir.x = ft_strlen(vars->map.map[y]);
+		vars->player.angle = 0;
 	else if (vars->map.map[y][x] == 'W')
-		vars->player.dir.x = 0;
+		vars->player.angle = PI;
 }
 
 void	ft_get_player_position(t_vars *vars)
@@ -46,7 +44,7 @@ void	ft_get_player_position(t_vars *vars)
 			{
 				vars->player.pos.x = (double)j + 0.5;
 				vars->player.pos.y = (double)i + 0.5;
-				ft_get_player_direction(vars);
+				ft_get_player_angle(vars);
 			}
 			j ++;
 		}
