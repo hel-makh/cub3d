@@ -6,7 +6,7 @@
 /*   By: hel-makh <hel-makh@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/05 11:43:14 by hel-makh          #+#    #+#             */
-/*   Updated: 2022/06/24 19:49:42 by hel-makh         ###   ########.fr       */
+/*   Updated: 2022/06/24 22:01:25 by hel-makh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,18 @@
 # define USAGE	"Usage: ./cub3d <file.cub>"
 
 /***********************[ Enumeration ]***********************/
+enum e_keycodes {
+	KEY_ESC = 65307,
+	KEY_A = 97,
+	KEY_W = 119,
+	KEY_D = 100,
+	KEY_S = 115,
+	KEY_LEFT = 65361,
+	KEY_UP = 65362,
+	KEY_RIGHT = 65363,
+	KEY_DOWN = 65364
+};
+
 enum e_window_res {
 	WIDTH = 640,
 	HEIGHT = 480
@@ -38,24 +50,9 @@ enum e_minimap {
 };
 
 enum e_player {
+	SPEED = 75,
+	ROT_SPEED = SPEED / 3 * 2,
 	FOV	= 90
-};
-
-enum e_speed {		// the higher the slower
-	PL_SPEED = 100,
-	RO_SPEED = PL_SPEED / 3 * 2
-};
-
-enum e_keycodes {
-	KEY_ESC = 65307,
-	KEY_A = 97,
-	KEY_W = 119,
-	KEY_D = 100,
-	KEY_S = 115,
-	KEY_LEFT = 65361,
-	KEY_UP = 65362,
-	KEY_RIGHT = 65363,
-	KEY_DOWN = 65364
 };
 
 /************************[ Structers ]************************/

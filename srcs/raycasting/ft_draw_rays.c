@@ -6,7 +6,7 @@
 /*   By: hel-makh <hel-makh@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 11:06:14 by hel-makh          #+#    #+#             */
-/*   Updated: 2022/06/24 17:40:53 by hel-makh         ###   ########.fr       */
+/*   Updated: 2022/06/24 21:47:11 by hel-makh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,10 @@ static void	ft_draw_line(t_vars *vars, t_coor dest, t_circle minimap)
 	steps *= C_SIDE_LEN - 1;
 	coor.x = minimap.x;
 	coor.y = minimap.y;
-	while (steps >= 0)
+	while (steps >= 0 && ft_is_in_circle(coor.x, coor.y, minimap) == 1)
 	{
-		if (ft_is_in_circle(coor.x, coor.y, minimap))
-			vars->mlx.img.data[(int)round(coor.y) * WIDTH + (int)round(coor.x)]
-				= ft_create_trgb(0, 0, 255, 0);
+		vars->mlx.img.data[(int)round(coor.y) * WIDTH + (int)round(coor.x)]
+			= ft_create_trgb(0, 0, 255, 0);
 		coor.x += inc.x;
 		coor.y += inc.y;
 		steps --;
@@ -111,19 +110,19 @@ t_coor	ft_get_hit_wall(t_vars *vars, double angle, int direction)
 
 void	ft_draw_rays(t_vars *vars, t_circle minimap)
 {
-	int		i;
+	int		sign;
 	double	fov;
 	double	angle;
 	t_coor	h_wall;
 	t_coor	v_wall;
 
-	i = -1;
-	while (i <= 1)
+	sign = -1;
+	while (sign <= 1)
 	{
-		fov = (FOV / 2) * (M_PI / 180.0);
-		while (fov >= 0)
+		fov = 0;
+		while (fov <= (FOV / 2) * (M_PI / 180.0))
 		{
-			angle = ft_radian_operations(vars->player.angle, i * fov);
+			angle = ft_radian_operations(vars->player.angle, sign * fov);
 			h_wall = ft_get_hit_wall(vars, angle, 'h');
 			v_wall = ft_get_hit_wall(vars, angle, 'v');
 			if (ft_get_distance(vars->player.pos, h_wall)
@@ -131,8 +130,8 @@ void	ft_draw_rays(t_vars *vars, t_circle minimap)
 				ft_draw_line(vars, h_wall, minimap);
 			else
 				ft_draw_line(vars, v_wall, minimap);
-			fov -= 0.05;
+			fov += 0.05;
 		}
-		i += 2;
+		sign += 2;
 	}
 }
