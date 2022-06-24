@@ -2,7 +2,8 @@ HEADER			=	includes/cub3d.h
 
 NAME			=	cub3d
 
-FILES			=	utils/ft_create_trgb.c\
+FILES			=	utils/ft_get_current_time.c\
+					utils/ft_create_trgb.c\
 					utils/ft_get_distance.c\
 					utils/ft_is_in_circle.c\
 					utils/ft_radian_operations.c\

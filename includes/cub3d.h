@@ -6,7 +6,7 @@
 /*   By: hel-makh <hel-makh@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/05 11:43:14 by hel-makh          #+#    #+#             */
-/*   Updated: 2022/06/24 22:01:25 by hel-makh         ###   ########.fr       */
+/*   Updated: 2022/06/24 23:53:28 by hel-makh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # include <fcntl.h>
 # include <math.h>
 # include <errno.h>
+# include <sys/time.h>
 # include <mlx.h>
 # include "../Libft/libft.h"
 
@@ -97,6 +98,7 @@ typedef struct s_mlx {
 	void	*mlx;
 	void	*win;
 	t_img	img;
+	int		fps;
 }	t_mlx;
 
 typedef struct s_vars {
@@ -106,6 +108,7 @@ typedef struct s_vars {
 }	t_vars;
 
 /**************************[ Utils ]**************************/
+long	ft_get_current_time(void);
 int		ft_create_trgb(int t, int r, int g, int b);
 double	ft_radian_operations(double radian, double amout);
 double	ft_get_distance(t_coor poin1, t_coor point2);
