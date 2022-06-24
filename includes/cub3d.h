@@ -6,7 +6,7 @@
 /*   By: hel-makh <hel-makh@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/05 11:43:14 by hel-makh          #+#    #+#             */
-/*   Updated: 2022/06/24 23:53:28 by hel-makh         ###   ########.fr       */
+/*   Updated: 2022/06/25 00:03:26 by hel-makh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,9 +38,11 @@ enum e_keycodes {
 	KEY_DOWN = 65364
 };
 
-enum e_window_res {
+enum e_window {
 	WIDTH = 640,
-	HEIGHT = 480
+	HEIGHT = 480,
+	FPS_X = 5,
+	FPS_Y = 15
 };
 
 enum e_minimap {
