@@ -6,11 +6,11 @@
 /*   By: hel-makh <hel-makh@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/08 15:06:14 by hel-makh          #+#    #+#             */
-/*   Updated: 2022/06/08 18:14:05 by hel-makh         ###   ########.fr       */
+/*   Updated: 2022/06/24 17:08:55 by hel-makh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/cub3d.h"
+#include "../../includes/cub3d.h"
 
 static int	ft_is_component_surrounded(char **map, int i, int j)
 {

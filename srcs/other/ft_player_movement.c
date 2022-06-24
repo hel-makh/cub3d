@@ -6,34 +6,28 @@
 /*   By: hel-makh <hel-makh@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/21 22:27:23 by hel-makh          #+#    #+#             */
-/*   Updated: 2022/06/22 18:47:43 by hel-makh         ###   ########.fr       */
+/*   Updated: 2022/06/24 17:04:08 by hel-makh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
-
-static void	increment_radian(double *radian, double amout)
-{
-	*radian += amout;
-	while (*radian > 2 * PI)
-		*radian -= 2 * PI;
-	while (*radian < 0)
-		*radian += 2 * PI;
-}
 
 static void	ft_get_player_direction(t_vars *vars)
 {
 	double	direction_angle;
 
 	if (vars->player.rotate)
-		increment_radian(&vars->player.angle, vars->player.rotate / 50);
+		vars->player.angle = ft_radian_operations(vars->player.angle,
+				vars->player.rotate / RO_SPEED);
 	direction_angle = vars->player.angle;
 	if (vars->player.move.y == -1)
-		increment_radian(&direction_angle, PI);
+		direction_angle = ft_radian_operations(direction_angle, M_PI);
 	else if (vars->player.move.x)
-		increment_radian(&direction_angle, vars->player.move.x * (PI / 2));
+		direction_angle = ft_radian_operations(direction_angle,
+				-vars->player.move.x * M_PI_2);
 	if (vars->player.move.x && vars->player.move.y)
-		increment_radian(&direction_angle, -vars->player.move.x * (PI / 4));
+		direction_angle = ft_radian_operations(direction_angle,
+				vars->player.move.x * M_PI_4);
 	vars->player.dir.x = cos(direction_angle);
 	vars->player.dir.y = sin(direction_angle);
 }
@@ -42,27 +36,25 @@ void	ft_move_player(t_vars *vars)
 {
 	t_coor	new_pos;
 
+	ft_get_player_direction(vars);
 	if (!vars->player.move.x && !vars->player.move.y)
 		return ;
-	ft_get_player_direction(vars);
-	new_pos.x = vars->player.pos.x + (vars->player.dir.x / 175);
-	if (vars->map.map[(int)floor(vars->player.pos.y)]
-		[(int)floor(new_pos.x)] != '1')
+	new_pos.x = vars->player.pos.x + (vars->player.dir.x / PL_SPEED);
+	if (vars->map.map[(int)vars->player.pos.y][(int)new_pos.x] != '1')
 		vars->player.pos.x = new_pos.x;
-	new_pos.y = vars->player.pos.y + (vars->player.dir.y / 175);
-	if (vars->map.map[(int)floor(new_pos.y)]
-		[(int)floor(vars->player.pos.x)] != '1')
+	new_pos.y = vars->player.pos.y + (vars->player.dir.y / PL_SPEED);
+	if (vars->map.map[(int)new_pos.y][(int)vars->player.pos.x] != '1')
 		vars->player.pos.y = new_pos.y;
 }
 
 int	key_press(int keycode, t_vars *vars)
 {
 	if (keycode == KEY_A)
-		vars->player.move.x = 1;
+		vars->player.move.x = -1;
 	else if (keycode == KEY_W || keycode == KEY_UP)
 		vars->player.move.y = -1;
 	else if (keycode == KEY_D)
-		vars->player.move.x = -1;
+		vars->player.move.x = 1;
 	else if (keycode == KEY_S || keycode == KEY_DOWN)
 		vars->player.move.y = 1;
 	else if (keycode == KEY_LEFT)

@@ -6,11 +6,11 @@
 /*   By: hel-makh <hel-makh@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/05 11:49:49 by hel-makh          #+#    #+#             */
-/*   Updated: 2022/06/22 17:37:30 by hel-makh         ###   ########.fr       */
+/*   Updated: 2022/06/24 17:10:32 by hel-makh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/cub3d.h"
+#include "../includes/cub3d.h"
 
 // void	print_info(t_vars vars)
 // {
@@ -43,13 +43,13 @@ int	main(int argc, char **argv)
 		return (EXIT_FAILURE);
 	// print_info(vars);
 	ft_get_player_position(&vars);
-	vars.window.img = NULL;
-	vars.mlx = mlx_init();
-	vars.mlx_win = mlx_new_window(vars.mlx, WIDTH, HEIGHT, "cub3d");
-	// mlx_hook(vars.mlx_win, 17, 0L, destroy_window, &vars);
-	mlx_hook(vars.mlx_win, 02, (1L<<0), key_press, &vars);
-	mlx_hook(vars.mlx_win, 03, (1L<<1), key_release, &vars);
-	mlx_loop_hook(vars.mlx, ft_loop_hook, &vars);
-	mlx_loop(vars.mlx);
+	vars.mlx.img.img = NULL;
+	vars.mlx.mlx = mlx_init();
+	vars.mlx.win = mlx_new_window(vars.mlx.mlx, WIDTH, HEIGHT, "cub3d");
+	// mlx_hook(vars.mlx.win, 17, 0L, destroy_window, &vars);
+	mlx_hook(vars.mlx.win, 02, (1L<<0), key_press, &vars);
+	mlx_hook(vars.mlx.win, 03, (1L<<1), key_release, &vars);
+	mlx_loop_hook(vars.mlx.mlx, ft_loop_hook, &vars);
+	mlx_loop(vars.mlx.mlx);
 	return (EXIT_SUCCESS);
 }

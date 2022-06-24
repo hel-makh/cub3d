@@ -2,20 +2,22 @@ HEADER			=	includes/cub3d.h
 
 NAME			=	cub3d
 
-MAIN			=	main.c
+SRCS			=	srcs/utils/ft_radian_operations.c\
+					srcs/utils/ft_get_distance.c\
+					srcs/utils/ft_is_in_circle.c\
+					srcs/utils/ft_create_trgb.c\
+					srcs/parsing/ft_import_map.c\
+					srcs/parsing/ft_parse_textures.c\
+					srcs/parsing/ft_parse_map.c\
+					srcs/parsing/ft_component_surroundings.c\
+					srcs/raycasting/ft_draw_rays.c\
+					srcs/other/ft_get_player_position.c\
+					srcs/other/ft_loop_hook.c\
+					srcs/other/ft_player_movement.c\
+					srcs/other/ft_render_minimap.c\
+					srcs/main.c
 
-SRCS			=	srcs/ft_create_trgb.c\
-					srcs/ft_import_map.c\
-					srcs/ft_parse_textures.c\
-					srcs/ft_parse_map.c\
-					srcs/ft_component_surroundings.c\
-					srcs/ft_get_player_position.c\
-					srcs/ft_loop_hook.c\
-					srcs/ft_render_minimap.c\
-					srcs/ft_player_movement.c
-
-OBJS			=	$(SRCS:.c=.o)\
-					$(MAIN:.c=.o)
+OBJS			=	$(SRCS:.c=.o)
 
 CC				=	cc
 
@@ -40,7 +42,7 @@ RM				=	rm -f
 %.o:%.c			$(HEADER) 
 				$(CC) $(CFLAGS) ${MLX_IFLAGS} -c $< -o $@
 
-$(NAME):		$(HEADER) $(LIBFT) $(OBJS)
+$(NAME):		$(HEADER) $(OBJS) $(LIBFT)
 				$(CC) $(CFLAGS) $(OBJS) $(LIBFT) $(MLX_LFLAGS) -o $(NAME)
 
 all:			$(NAME)

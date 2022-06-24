@@ -6,7 +6,7 @@
 /*   By: hel-makh <hel-makh@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/05 11:43:14 by hel-makh          #+#    #+#             */
-/*   Updated: 2022/06/22 18:16:21 by hel-makh         ###   ########.fr       */
+/*   Updated: 2022/06/24 17:33:36 by hel-makh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,13 @@
 # include <stdio.h>
 # include <fcntl.h>
 # include <math.h>
+# include <errno.h>
 # include <mlx.h>
 # include "../Libft/libft.h"
 
 # define USAGE	"Usage: ./cub3d <file.cub>"
 
-# define PI	3.141592653589793238
-
+/***********************[ Enumeration ]***********************/
 enum e_window_res {
 	WIDTH = 640,
 	HEIGHT = 480
@@ -32,9 +32,18 @@ enum e_window_res {
 
 enum e_minimap {
 	BORDER = 10,
-	RADIUS = 225,
-	SIDE_LEN = (RADIUS * 2) / 10,
-	PL_RADIUS = 4
+	RADIUS = 75,
+	C_SIDE_LEN = (RADIUS * 2) / 10,
+	PL_RADIUS = 2
+};
+
+enum e_player {
+	FOV	= 90
+};
+
+enum e_speed {		// the higher the slower
+	PL_SPEED = 100,
+	RO_SPEED = PL_SPEED / 3 * 2
 };
 
 enum e_keycodes {
@@ -49,6 +58,7 @@ enum e_keycodes {
 	KEY_DOWN = 65364
 };
 
+/************************[ Structers ]************************/
 typedef struct s_circle {
 	double	x;
 	double	y;
@@ -68,14 +78,6 @@ typedef struct s_player {
 	double	rotate;
 }	t_player;
 
-typedef struct s_img {
-	void	*img;
-	int		*data;
-	int		bpp;
-	int		line_length;
-	int		endian;
-}	t_img;
-
 typedef struct s_map {
 	char	**map;
 	int		ce_color;
@@ -86,25 +88,48 @@ typedef struct s_map {
 	char	*east;
 }	t_map;
 
+typedef struct s_img {
+	void	*img;
+	int		*data;
+	int		bpp;
+	int		line_len;
+	int		endian;
+}	t_img;
+
+typedef struct s_mlx {
+	void	*mlx;
+	void	*win;
+	t_img	img;
+}	t_mlx;
+
 typedef struct s_vars {
-	void		*mlx;
-	void		*mlx_win;
+	t_mlx		mlx;
 	t_map		map;
-	t_img		window;
 	t_player	player;
 }	t_vars;
 
+/**************************[ Utils ]**************************/
+double	ft_radian_operations(double radian, double amout);
+double	ft_get_distance(t_coor poin1, t_coor point2);
+int		ft_is_in_circle(double x, double y, t_circle circle);
 int		ft_create_trgb(int t, int r, int g, int b);
 
+/*************************[ Parsing ]*************************/
 int		ft_import_map(t_map *map, char *file);
 int		ft_parse_textures(t_map *map, int fd);
 int		ft_parse_map(t_map *map, int fd);
 int		ft_component_surroundings(char **map, int i, int j);
+
+/************************[ RayCasting ]***********************/
+t_coor	ft_get_hit_wall(t_vars *vars, double angle, int direction);
+void	ft_draw_rays(t_vars *vars, t_circle minimap);
+
+/**************************[ Other ]**************************/
 void	ft_get_player_position(t_vars *vars);
 int		ft_loop_hook(t_vars *vars);
-void	ft_render_minimap(t_vars *vars);
-void	ft_move_player(t_vars *vars);
 int		key_press(int keycode, t_vars *vars);
 int		key_release(int keycode, t_vars *vars);
+void	ft_move_player(t_vars *vars);
+void	ft_render_minimap(t_vars *vars);
 
 #endif
