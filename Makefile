@@ -2,22 +2,28 @@ HEADER			=	includes/cub3d.h
 
 NAME			=	cub3d
 
-SRCS			=	srcs/utils/ft_radian_operations.c\
-					srcs/utils/ft_get_distance.c\
-					srcs/utils/ft_is_in_circle.c\
-					srcs/utils/ft_create_trgb.c\
-					srcs/parsing/ft_import_map.c\
-					srcs/parsing/ft_parse_textures.c\
-					srcs/parsing/ft_parse_map.c\
-					srcs/parsing/ft_component_surroundings.c\
-					srcs/raycasting/ft_draw_rays.c\
-					srcs/other/ft_get_player_position.c\
-					srcs/other/ft_loop_hook.c\
-					srcs/other/ft_player_movement.c\
-					srcs/other/ft_render_minimap.c\
-					srcs/main.c
+FILES			=	utils/ft_create_trgb.c\
+					utils/ft_get_distance.c\
+					utils/ft_is_in_circle.c\
+					utils/ft_radian_operations.c\
+					parsing/ft_import_map.c\
+					parsing/ft_parse_textures.c\
+					parsing/ft_parse_map.c\
+					parsing/ft_component_surroundings.c\
+					raycasting/ft_draw_rays.c\
+					other/ft_get_player_position.c\
+					other/ft_loop_hook.c\
+					other/ft_player_movement.c\
+					other/ft_render_minimap.c\
+					main.c
 
-OBJS			=	$(SRCS:.c=.o)
+SRCS_DIR		=	srcs/
+
+SRCS			=	$(addprefix $(SRCS_DIR), $(FILES))
+
+OBJS_DIR		=	objs/
+
+OBJS			=	$(patsubst %.c, %.o, $(addprefix $(OBJS_DIR), $(FILES)))
 
 CC				=	cc
 
@@ -35,29 +41,30 @@ endif
 
 LIBFT_DIR		=	./Libft
 
-LIBFT			=	${LIBFT_DIR}/libft.a
+LIBFT			=	$(LIBFT_DIR)/libft.a
 
-RM				=	rm -f
+RM				=	rm -rf
 
-%.o:%.c			$(HEADER) 
-				$(CC) $(CFLAGS) ${MLX_IFLAGS} -c $< -o $@
+$(OBJS_DIR)%.o:$(SRCS_DIR)%.c		$(HEADER)
+					@mkdir -p $(shell dirname $@)
+					$(CC) $(CFLAGS) $(MLX_IFLAGS) -c $< -o $@
 
-$(NAME):		$(HEADER) $(OBJS) $(LIBFT)
-				$(CC) $(CFLAGS) $(OBJS) $(LIBFT) $(MLX_LFLAGS) -o $(NAME)
+$(NAME):			$(HEADER) $(OBJS) $(LIBFT)
+					$(CC) $(CFLAGS) $(OBJS) $(LIBFT) $(MLX_LFLAGS) -o $(NAME)
 
-all:			$(NAME)
+all:				$(NAME)
 
 $(LIBFT):
-				make -C $(LIBFT_DIR)
+					make -C $(LIBFT_DIR)
 
 clean:
-				$(RM) $(OBJS)
-				make clean -C $(LIBFT_DIR)
+					$(RM) $(OBJS_DIR)
+					make clean -C $(LIBFT_DIR)
 
-fclean:			clean
-				$(RM) $(NAME)
-				make fclean -C $(LIBFT_DIR)
+fclean:				clean
+					$(RM) $(NAME)
+					make fclean -C $(LIBFT_DIR)
 
-re:				fclean all
+re:					fclean all
 
-.PHONY:			all clean fclean re
+.PHONY:				all clean fclean re

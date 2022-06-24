@@ -1,8 +1,9 @@
 .vscode/
 *.dSYM/
 .DS_Store
+objs/
 *.o
 *.out
 *.a
 *.exe
-minishell
+cub3d

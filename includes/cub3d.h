@@ -6,7 +6,7 @@
 /*   By: hel-makh <hel-makh@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/05 11:43:14 by hel-makh          #+#    #+#             */
-/*   Updated: 2022/06/24 17:33:36 by hel-makh         ###   ########.fr       */
+/*   Updated: 2022/06/24 19:49:42 by hel-makh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,10 +109,10 @@ typedef struct s_vars {
 }	t_vars;
 
 /**************************[ Utils ]**************************/
+int		ft_create_trgb(int t, int r, int g, int b);
 double	ft_radian_operations(double radian, double amout);
 double	ft_get_distance(t_coor poin1, t_coor point2);
 int		ft_is_in_circle(double x, double y, t_circle circle);
-int		ft_create_trgb(int t, int r, int g, int b);
 
 /*************************[ Parsing ]*************************/
 int		ft_import_map(t_map *map, char *file);
