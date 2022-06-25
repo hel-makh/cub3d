@@ -6,7 +6,7 @@
 /*   By: hel-makh <hel-makh@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/05 11:43:14 by hel-makh          #+#    #+#             */
-/*   Updated: 2022/06/25 00:03:26 by hel-makh         ###   ########.fr       */
+/*   Updated: 2022/06/25 11:58:51 by hel-makh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,12 +48,14 @@ enum e_window {
 enum e_minimap {
 	BORDER = 10,
 	RADIUS = 75,
-	C_SIDE_LEN = (RADIUS * 2) / 10,
+	CENTER = BORDER + RADIUS,
+	C_VISIBLE = 10,
+	C_SIDE_LEN = (RADIUS * 2) / C_VISIBLE,
 	PL_RADIUS = 2
 };
 
 enum e_player {
-	SPEED = 75,
+	SPEED = 300,					// the higher the slower
 	ROT_SPEED = SPEED / 3 * 2,
 	FOV	= 90
 };
