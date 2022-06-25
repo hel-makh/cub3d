@@ -6,30 +6,24 @@
 /*   By: hel-makh <hel-makh@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/05 11:49:49 by hel-makh          #+#    #+#             */
-/*   Updated: 2022/06/25 12:53:38 by hel-makh         ###   ########.fr       */
+/*   Updated: 2022/06/25 13:13:36 by hel-makh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
-// void	print_info(t_vars vars)
-// {
-// 	printf("\n> textures:\n");
-// 	printf("north: '%s'\n", vars.map.north);
-// 	printf("south: '%s'\n", vars.map.south);
-// 	printf("west: '%s'\n", vars.map.west);
-// 	printf("east: '%s'\n", vars.map.east);
-// 	printf("floor: %d,%d,%d\n",	vars.map.floor[0],
-// 								vars.map.floor[1],
-// 								vars.map.floor[2]);
-// 	printf("ceilling: %d,%d,%d\n",	vars.map.ceilling[0],
-// 									vars.map.ceilling[1],
-// 									vars.map.ceilling[2]);
-
-// 	printf("\n> map:\n");
-// 	for (size_t i = 0; i < ft_arrlen(vars.map.map); i++)
-// 		printf("%s\n", vars.map.map[i]);
-// }
+int	destroy_window(t_vars *vars)
+{
+	mlx_destroy_window(vars->mlx.mlx, vars->mlx.win);
+	if (vars->mlx.img.img)
+		mlx_destroy_image(vars->mlx.mlx, vars->mlx.img.img);
+	ft_free_2d(vars->map.map);
+	ft_free(vars->map.north);
+	ft_free(vars->map.south);
+	ft_free(vars->map.west);
+	ft_free(vars->map.east);
+	exit (EXIT_SUCCESS);
+}
 
 int	main(int argc, char **argv)
 {
@@ -41,15 +35,14 @@ int	main(int argc, char **argv)
 		return (printf("Error\nInvalid arguments.\n%s\n", USAGE), EXIT_FAILURE);
 	if (!ft_import_map(&vars.map, argv[1]))
 		return (EXIT_FAILURE);
-	// print_info(vars);
 	ft_get_player_position(&vars);
 	vars.mlx.fps = 0;
 	vars.mlx.img.img = NULL;
 	vars.mlx.mlx = mlx_init();
 	vars.mlx.win = mlx_new_window(vars.mlx.mlx, WIDTH, HEIGHT, "cub3d");
-	// mlx_hook(vars.mlx.win, 17, 0L, destroy_window, &vars);
-	mlx_hook(vars.mlx.win, 02, (1L<<0), key_press, &vars);
-	mlx_hook(vars.mlx.win, 03, (1L<<1), key_release, &vars);
+	mlx_hook(vars.mlx.win, 02, (1L << 0), key_press, &vars);
+	mlx_hook(vars.mlx.win, 03, (1L << 1), key_release, &vars);
+	mlx_hook(vars.mlx.win, 17, 0L, destroy_window, &vars);
 	mlx_loop_hook(vars.mlx.mlx, frame_rendering, &vars);
 	mlx_loop(vars.mlx.mlx);
 	return (EXIT_SUCCESS);
