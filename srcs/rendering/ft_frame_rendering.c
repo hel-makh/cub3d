@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_loop_hook.c                                     :+:      :+:    :+:   */
+/*   frame_rendering.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hel-makh <hel-makh@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/21 16:44:23 by hel-makh          #+#    #+#             */
-/*   Updated: 2022/06/25 00:02:25 by hel-makh         ###   ########.fr       */
+/*   Updated: 2022/06/25 12:51:53 by hel-makh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static void	ft_fps_counter(t_vars *vars)
 	fps ++;
 }
 
-int	ft_loop_hook(t_vars *vars)
+int	frame_rendering(t_vars *vars)
 {
 	ft_fps_counter(vars);
 	if (vars->mlx.img.img)

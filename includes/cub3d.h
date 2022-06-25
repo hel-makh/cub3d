@@ -6,7 +6,7 @@
 /*   By: hel-makh <hel-makh@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/05 11:43:14 by hel-makh          #+#    #+#             */
-/*   Updated: 2022/06/25 11:58:51 by hel-makh         ###   ########.fr       */
+/*   Updated: 2022/06/25 12:53:30 by hel-makh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,16 +124,18 @@ int		ft_parse_textures(t_map *map, int fd);
 int		ft_parse_map(t_map *map, int fd);
 int		ft_component_surroundings(char **map, int i, int j);
 
-/************************[ RayCasting ]***********************/
-t_coor	ft_get_hit_wall(t_vars *vars, double angle, int direction);
-void	ft_draw_rays(t_vars *vars, t_circle minimap);
-
-/**************************[ Other ]**************************/
+/************************[ Movements ]************************/
 void	ft_get_player_position(t_vars *vars);
-int		ft_loop_hook(t_vars *vars);
 int		key_press(int keycode, t_vars *vars);
 int		key_release(int keycode, t_vars *vars);
 void	ft_move_player(t_vars *vars);
+
+/************************[ Rendering ]************************/
+int		frame_rendering(t_vars *vars);
 void	ft_render_minimap(t_vars *vars);
+
+/************************[ RayCasting ]***********************/
+t_coor	ft_get_hit_wall(t_vars *vars, double angle, int direction);
+void	ft_draw_rays(t_vars *vars, t_circle minimap);
 
 #endif

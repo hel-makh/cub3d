@@ -1,3 +1,15 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: hel-makh <hel-makh@student.1337.ma>        +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2022/06/05 11:42:59 by hel-makh          #+#    #+#              #
+#    Updated: 2022/06/25 12:57:03 by hel-makh         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
 HEADER			=	includes/cub3d.h
 
 NAME			=	cub3d
@@ -11,11 +23,11 @@ FILES			=	utils/ft_get_current_time.c\
 					parsing/ft_parse_textures.c\
 					parsing/ft_parse_map.c\
 					parsing/ft_component_surroundings.c\
+					movements/ft_get_player_position.c\
+					movements/ft_player_movement.c\
+					rendering/ft_frame_rendering.c\
+					rendering/ft_render_minimap.c\
 					raycasting/ft_draw_rays.c\
-					other/ft_get_player_position.c\
-					other/ft_loop_hook.c\
-					other/ft_player_movement.c\
-					other/ft_render_minimap.c\
 					main.c
 
 SRCS_DIR		=	srcs/

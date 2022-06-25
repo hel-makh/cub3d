@@ -6,7 +6,7 @@
 /*   By: hel-makh <hel-makh@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/05 11:49:49 by hel-makh          #+#    #+#             */
-/*   Updated: 2022/06/24 23:30:46 by hel-makh         ###   ########.fr       */
+/*   Updated: 2022/06/25 12:53:38 by hel-makh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ int	main(int argc, char **argv)
 	// mlx_hook(vars.mlx.win, 17, 0L, destroy_window, &vars);
 	mlx_hook(vars.mlx.win, 02, (1L<<0), key_press, &vars);
 	mlx_hook(vars.mlx.win, 03, (1L<<1), key_release, &vars);
-	mlx_loop_hook(vars.mlx.mlx, ft_loop_hook, &vars);
+	mlx_loop_hook(vars.mlx.mlx, frame_rendering, &vars);
 	mlx_loop(vars.mlx.mlx);
 	return (EXIT_SUCCESS);
 }
