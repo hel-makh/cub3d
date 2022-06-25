@@ -6,13 +6,13 @@
 /*   By: hel-makh <hel-makh@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/05 11:49:49 by hel-makh          #+#    #+#             */
-/*   Updated: 2022/06/25 13:13:36 by hel-makh         ###   ########.fr       */
+/*   Updated: 2022/06/25 13:15:05 by hel-makh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
-int	destroy_window(t_vars *vars)
+int	exit_game(t_vars *vars)
 {
 	mlx_destroy_window(vars->mlx.mlx, vars->mlx.win);
 	if (vars->mlx.img.img)
@@ -42,7 +42,7 @@ int	main(int argc, char **argv)
 	vars.mlx.win = mlx_new_window(vars.mlx.mlx, WIDTH, HEIGHT, "cub3d");
 	mlx_hook(vars.mlx.win, 02, (1L << 0), key_press, &vars);
 	mlx_hook(vars.mlx.win, 03, (1L << 1), key_release, &vars);
-	mlx_hook(vars.mlx.win, 17, 0L, destroy_window, &vars);
+	mlx_hook(vars.mlx.win, 17, 0L, exit_game, &vars);
 	mlx_loop_hook(vars.mlx.mlx, frame_rendering, &vars);
 	mlx_loop(vars.mlx.mlx);
 	return (EXIT_SUCCESS);

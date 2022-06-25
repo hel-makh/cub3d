@@ -6,13 +6,13 @@
 /*   By: hel-makh <hel-makh@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/21 22:27:23 by hel-makh          #+#    #+#             */
-/*   Updated: 2022/06/25 13:12:31 by hel-makh         ###   ########.fr       */
+/*   Updated: 2022/06/25 13:15:10 by hel-makh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
-int	destroy_window(t_vars *vars);
+int	exit_game(t_vars *vars);
 
 static void	ft_get_player_direction(t_vars *vars)
 {
@@ -64,7 +64,7 @@ int	key_press(int keycode, t_vars *vars)
 	else if (keycode == KEY_RIGHT)
 		vars->player.rotate = 1;
 	else if (keycode == KEY_ESC)
-		destroy_window(vars);
+		exit_game(vars);
 	return (0);
 }
 
