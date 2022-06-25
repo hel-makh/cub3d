@@ -4,7 +4,8 @@ HEADER			=	libft.h
 
 NAME			=	libft.a
 
-SRCS			=	ft_isalpha.c\
+SRCS			=	ft_max_min.c\
+					ft_isalpha.c\
 					ft_isdigit.c\
 					ft_isalnum.c\
 					ft_isascii.c\
