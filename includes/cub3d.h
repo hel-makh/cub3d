@@ -6,7 +6,7 @@
 /*   By: hel-makh <hel-makh@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/05 11:43:14 by hel-makh          #+#    #+#             */
-/*   Updated: 2022/06/25 12:53:30 by hel-makh         ###   ########.fr       */
+/*   Updated: 2022/06/27 18:15:36 by hel-makh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,8 +55,8 @@ enum e_minimap {
 };
 
 enum e_player {
-	SPEED = 300,					// the higher the slower
-	ROT_SPEED = SPEED / 3 * 2,
+	SPEED = 3,
+	ROT_SPEED = 4,
 	FOV	= 90
 };
 
@@ -130,12 +130,13 @@ int		key_press(int keycode, t_vars *vars);
 int		key_release(int keycode, t_vars *vars);
 void	ft_move_player(t_vars *vars);
 
+/************************[ RayCasting ]***********************/
+t_coor	ft_get_hit_wall(t_vars *vars, double angle, int *direction);
+
 /************************[ Rendering ]************************/
 int		frame_rendering(t_vars *vars);
 void	ft_render_minimap(t_vars *vars);
-
-/************************[ RayCasting ]***********************/
-t_coor	ft_get_hit_wall(t_vars *vars, double angle, int direction);
 void	ft_draw_rays(t_vars *vars, t_circle minimap);
+void	ft_render_3d_scene(t_vars *vars);
 
 #endif

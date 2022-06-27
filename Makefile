@@ -6,7 +6,7 @@
 #    By: hel-makh <hel-makh@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/05 11:42:59 by hel-makh          #+#    #+#              #
-#    Updated: 2022/06/25 12:57:03 by hel-makh         ###   ########.fr        #
+#    Updated: 2022/06/27 17:25:07 by hel-makh         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,9 +25,11 @@ FILES			=	utils/ft_get_current_time.c\
 					parsing/ft_component_surroundings.c\
 					movements/ft_get_player_position.c\
 					movements/ft_player_movement.c\
+					raycasting/ft_get_hit_wall.c\
 					rendering/ft_frame_rendering.c\
 					rendering/ft_render_minimap.c\
-					raycasting/ft_draw_rays.c\
+					rendering/ft_draw_rays.c\
+					rendering/ft_render_3d_scene.c\
 					main.c
 
 SRCS_DIR		=	srcs/

@@ -6,7 +6,7 @@
 /*   By: hel-makh <hel-makh@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/05 11:49:49 by hel-makh          #+#    #+#             */
-/*   Updated: 2022/06/25 13:15:05 by hel-makh         ###   ########.fr       */
+/*   Updated: 2022/06/27 01:16:05 by hel-makh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int	main(int argc, char **argv)
 	if (!ft_import_map(&vars.map, argv[1]))
 		return (EXIT_FAILURE);
 	ft_get_player_position(&vars);
-	vars.mlx.fps = 0;
+	vars.mlx.fps = 1000;
 	vars.mlx.img.img = NULL;
 	vars.mlx.mlx = mlx_init();
 	vars.mlx.win = mlx_new_window(vars.mlx.mlx, WIDTH, HEIGHT, "cub3d");
