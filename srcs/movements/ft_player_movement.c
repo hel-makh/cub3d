@@ -6,7 +6,7 @@
 /*   By: hel-makh <hel-makh@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/21 22:27:23 by hel-makh          #+#    #+#             */
-/*   Updated: 2022/06/25 13:15:10 by hel-makh         ###   ########.fr       */
+/*   Updated: 2022/06/27 00:57:42 by hel-makh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static void	ft_get_player_direction(t_vars *vars)
 
 	if (vars->player.rotate)
 		vars->player.angle = ft_radian_operations(vars->player.angle,
-				vars->player.rotate / ROT_SPEED);
+				(vars->player.rotate * ROT_SPEED) / vars->mlx.fps);
 	direction_angle = vars->player.angle;
 	if (vars->player.move.y == -1)
 		direction_angle = ft_radian_operations(direction_angle, M_PI);
@@ -41,10 +41,12 @@ void	ft_move_player(t_vars *vars)
 	ft_get_player_direction(vars);
 	if (!vars->player.move.x && !vars->player.move.y)
 		return ;
-	new_pos.x = vars->player.pos.x + (vars->player.dir.x / SPEED);
+	new_pos.x = vars->player.pos.x
+		+ (vars->player.dir.x * SPEED) / vars->mlx.fps;
 	if (vars->map.map[(int)vars->player.pos.y][(int)new_pos.x] != '1')
 		vars->player.pos.x = new_pos.x;
-	new_pos.y = vars->player.pos.y + (vars->player.dir.y / SPEED);
+	new_pos.y = vars->player.pos.y
+		+ (vars->player.dir.y * SPEED) / vars->mlx.fps;
 	if (vars->map.map[(int)new_pos.y][(int)vars->player.pos.x] != '1')
 		vars->player.pos.y = new_pos.y;
 }
