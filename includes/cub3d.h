@@ -6,7 +6,7 @@
 /*   By: hel-makh <hel-makh@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/05 11:43:14 by hel-makh          #+#    #+#             */
-/*   Updated: 2022/06/27 18:15:36 by hel-makh         ###   ########.fr       */
+/*   Updated: 2022/06/28 14:36:44 by hel-makh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@
 # define USAGE	"Usage: ./cub3d <file.cub>"
 
 /***********************[ Enumeration ]***********************/
+#if defined(__linux__)
 enum e_keycodes {
 	KEY_ESC = 65307,
 	KEY_A = 97,
@@ -37,10 +38,23 @@ enum e_keycodes {
 	KEY_RIGHT = 65363,
 	KEY_DOWN = 65364
 };
+#elif defined(__APPLE__) && defined(__MACH__)
+enum e_keycodes {
+	KEY_ESC = 53,
+	KEY_A = 0,
+	KEY_W = 13,
+	KEY_D = 2,
+	KEY_S = 1,
+	KEY_LEFT = 123,
+	KEY_UP = 126,
+	KEY_RIGHT = 124,
+	KEY_DOWN = 125
+};
+#endif
 
 enum e_window {
-	WIDTH = 640,
-	HEIGHT = 480,
+	WIDTH = 1280,
+	HEIGHT = 720,
 	FPS_X = 5,
 	FPS_Y = 15
 };
@@ -57,7 +71,7 @@ enum e_minimap {
 enum e_player {
 	SPEED = 3,
 	ROT_SPEED = 4,
-	FOV	= 90
+	FOV	= 60
 };
 
 /************************[ Structers ]************************/
