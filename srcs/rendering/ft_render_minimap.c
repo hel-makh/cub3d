@@ -6,11 +6,11 @@
 /*   By: hel-makh <hel-makh@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 19:53:41 by hel-makh          #+#    #+#             */
-/*   Updated: 2022/06/25 12:06:53 by hel-makh         ###   ########.fr       */
+/*   Updated: 2022/06/28 14:27:29 by hel-makh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/cub3d.h"
+#include "../../includes/cub3d.h"
 
 static void	ft_draw_circle(int *data, t_circle circle, int color)
 {
