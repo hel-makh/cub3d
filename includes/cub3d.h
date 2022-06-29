@@ -6,7 +6,7 @@
 /*   By: hel-makh <hel-makh@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/05 11:43:14 by hel-makh          #+#    #+#             */
-/*   Updated: 2022/06/29 20:14:10 by hel-makh         ###   ########.fr       */
+/*   Updated: 2022/06/29 20:59:41 by hel-makh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ enum e_window {
 
 enum e_minimap {
 	BORDER = 10,
-	RADIUS = 300,
+	RADIUS = 75,
 	CENTER = RADIUS,
 	C_VISIBLE = 10,
 	C_SIDE_LEN = (RADIUS * 2) / C_VISIBLE,
