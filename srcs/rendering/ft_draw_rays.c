@@ -6,7 +6,7 @@
 /*   By: hel-makh <hel-makh@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 11:06:14 by hel-makh          #+#    #+#             */
-/*   Updated: 2022/06/29 11:33:05 by hel-makh         ###   ########.fr       */
+/*   Updated: 2022/06/29 20:14:53 by hel-makh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,6 @@ void	ft_draw_rays(t_vars *vars, t_circle minimap)
 				(degree - (FOV / 2)) * (M_PI / 180));
 		hit_wall = ft_get_hit_wall(vars, angle, NULL);
 		ft_draw_line(vars, hit_wall, minimap);
-		degree += 2.5;
+		degree += 0.5;
 	}
 }

@@ -6,26 +6,18 @@
 /*   By: hel-makh <hel-makh@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/05 19:04:43 by hel-makh          #+#    #+#             */
-/*   Updated: 2022/06/24 17:08:00 by hel-makh         ###   ########.fr       */
+/*   Updated: 2022/06/29 20:06:05 by hel-makh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-static int	ft_is_parsed(t_map *map)
-{
-	if (map->north && map->south && map->west && map->east
-		&& map->fl_color != -1 && map->ce_color != -1)
-		return (1);
-	return (0);
-}
-
 static int	ft_is_duplicated(t_map *map, char **info)
 {
-	if ((!ft_strcmp(info[0], "NO") && map->north)
-		|| (!ft_strcmp(info[0], "SO") && map->south)
-		|| (!ft_strcmp(info[0], "WE") && map->west)
-		|| (!ft_strcmp(info[0], "EA") && map->east)
+	if ((!ft_strcmp(info[0], "NO") && map->north.img)
+		|| (!ft_strcmp(info[0], "SO") && map->south.img)
+		|| (!ft_strcmp(info[0], "WE") && map->west.img)
+		|| (!ft_strcmp(info[0], "EA") && map->east.img)
 		|| (!ft_strcmp(info[0], "F") && map->fl_color != -1)
 		|| (!ft_strcmp(info[0], "C") && map->ce_color != -1))
 		return (1);
@@ -54,40 +46,43 @@ static int	ft_get_rgb_colors(int *color, char **info)
 	return (1);
 }
 
-static int	ft_get_textures(t_map *map, char **info)
+static int	ft_open_image(t_vars *vars, t_img *img, char *path)
 {
-	if (!ft_strcmp(info[0], "NO"))
-		map->north = ft_strdup(info[1]);
-	else if (!ft_strcmp(info[0], "SO"))
-		map->south = ft_strdup(info[1]);
-	else if (!ft_strcmp(info[0], "WE"))
-		map->west = ft_strdup(info[1]);
-	else if (!ft_strcmp(info[0], "EA"))
-		map->east = ft_strdup(info[1]);
-	else if (!ft_strcmp(info[0], "F"))
-	{
-		if (!ft_get_rgb_colors(&map->fl_color, info))
-			return (0);
-	}
-	else if (!ft_strcmp(info[0], "C"))
-	{
-		if (!ft_get_rgb_colors(&map->ce_color, info))
-			return (0);
-	}
-	else
-	{
-		printf("Error\nInvalid texture information [%s].\n", info[0]);
-		return (0);
-	}
+	img->img = mlx_xpm_file_to_image(vars->mlx.mlx, path,
+		&img->width, &img->height);
+	if (!img->img)
+		return (printf("Error\nCouldn't load texture: %s\n", path), 0);
+	img->data = (int *)mlx_get_data_addr(img->img, &img->bpp,
+		&img->line_len, &img->endian);
 	return (1);
 }
 
-int	ft_parse_textures(t_map *map, int fd)
+static int	ft_get_textures(t_vars *vars, char **info)
+{
+	if (!ft_strcmp(info[0], "NO"))
+		return (ft_open_image(vars, &vars->map.north, info[1]));
+	else if (!ft_strcmp(info[0], "SO"))
+		return (ft_open_image(vars, &vars->map.south, info[1]));
+	else if (!ft_strcmp(info[0], "WE"))
+		return (ft_open_image(vars, &vars->map.west, info[1]));
+	else if (!ft_strcmp(info[0], "EA"))
+		return (ft_open_image(vars, &vars->map.east, info[1]));
+	else if (!ft_strcmp(info[0], "F"))
+		return (ft_get_rgb_colors(&vars->map.fl_color, info));
+	else if (!ft_strcmp(info[0], "C"))
+		return (ft_get_rgb_colors(&vars->map.ce_color, info));
+	printf("Error\nInvalid texture information [%s].\n", info[0]);
+	return (0);
+}
+
+int	ft_parse_textures(t_vars *vars, int fd)
 {
 	char	*line;
 	char	**info;
 
-	while (!ft_is_parsed(map))
+	while (!vars->map.north.img || !vars->map.south.img
+		|| !vars->map.west.img || !vars->map.east.img
+		|| vars->map.fl_color == -1 || vars->map.ce_color == -1)
 	{
 		line = get_next_line(fd);
 		if (!line)
@@ -97,9 +92,9 @@ int	ft_parse_textures(t_map *map, int fd)
 			info = ft_split(line, ' ');
 			if (ft_arrlen(info) != 2)
 				return (printf("Error\nInvalid texture format.\n"), 0);
-			if (ft_is_duplicated(map, info))
+			if (ft_is_duplicated(&vars->map, info))
 				return (printf("Error\nDuplicated textures [%s].\n", info[0]), 0);
-			if (!ft_get_textures(map, info))
+			if (!ft_get_textures(vars, info))
 				return (0);
 			info = ft_free_2d(info);
 		}

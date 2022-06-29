@@ -6,7 +6,7 @@
 #    By: hel-makh <hel-makh@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/05 11:42:59 by hel-makh          #+#    #+#              #
-#    Updated: 2022/06/27 17:25:07 by hel-makh         ###   ########.fr        #
+#    Updated: 2022/06/29 17:24:56 by hel-makh         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,6 +30,7 @@ FILES			=	utils/ft_get_current_time.c\
 					rendering/ft_render_minimap.c\
 					rendering/ft_draw_rays.c\
 					rendering/ft_render_3d_scene.c\
+					other/ft_exit_game.c\
 					main.c
 
 SRCS_DIR		=	srcs/

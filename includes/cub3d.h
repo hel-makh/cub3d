@@ -6,7 +6,7 @@
 /*   By: hel-makh <hel-makh@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/05 11:43:14 by hel-makh          #+#    #+#             */
-/*   Updated: 2022/06/29 11:28:44 by hel-makh         ###   ########.fr       */
+/*   Updated: 2022/06/29 20:14:10 by hel-makh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ enum e_keycodes {
 	KEY_RIGHT = 124,
 	KEY_DOWN = 125
 };
+
 # endif
 
 enum e_window {
@@ -64,7 +65,7 @@ enum e_window {
 
 enum e_minimap {
 	BORDER = 10,
-	RADIUS = 75,
+	RADIUS = 300,
 	CENTER = RADIUS,
 	C_VISIBLE = 10,
 	C_SIDE_LEN = (RADIUS * 2) / C_VISIBLE,
@@ -97,23 +98,25 @@ typedef struct s_player {
 	double	rotate;
 }	t_player;
 
-typedef struct s_map {
-	char	**map;
-	int		ce_color;
-	int		fl_color;
-	char	*north;
-	char	*south;
-	char	*west;
-	char	*east;
-}	t_map;
-
 typedef struct s_img {
 	void	*img;
 	int		*data;
 	int		bpp;
 	int		line_len;
 	int		endian;
+	int		width;
+	int		height;
 }	t_img;
+
+typedef struct s_map {
+	char	**map;
+	int		ce_color;
+	int		fl_color;
+	t_img	north;
+	t_img	south;
+	t_img	west;
+	t_img	east;
+}	t_map;
 
 typedef struct s_mlx {
 	void	*mlx;
@@ -137,8 +140,8 @@ double	ft_get_distance(t_coor poin1, t_coor point2);
 int		ft_is_in_circle(double x, double y, t_circle circle);
 
 /*************************[ Parsing ]*************************/
-int		ft_import_map(t_map *map, char *file);
-int		ft_parse_textures(t_map *map, int fd);
+int		ft_import_map(t_vars *vars, char *file);
+int		ft_parse_textures(t_vars *vars, int fd);
 int		ft_parse_map(t_map *map, int fd);
 int		ft_component_surroundings(char **map, int i, int j);
 
@@ -157,5 +160,8 @@ int		frame_rendering(t_vars *vars);
 void	ft_render_minimap(t_vars *vars);
 void	ft_draw_rays(t_vars *vars, t_circle minimap);
 void	ft_render_3d_scene(t_vars *vars);
+
+/**************************[ Other ]**************************/
+int		ft_exit_game(t_vars *vars, int exit_status);
 
 #endif
