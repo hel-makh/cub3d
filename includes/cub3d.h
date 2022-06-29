@@ -6,7 +6,7 @@
 /*   By: hel-makh <hel-makh@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/05 11:43:14 by hel-makh          #+#    #+#             */
-/*   Updated: 2022/06/29 09:38:31 by hel-makh         ###   ########.fr       */
+/*   Updated: 2022/06/29 11:28:44 by hel-makh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ enum e_keycodes {
 	KEY_RIGHT = 65363,
 	KEY_DOWN = 65364
 };
+
 # elif defined(__APPLE__) && defined(__MACH__)
 
 enum e_keycodes {
@@ -64,7 +65,7 @@ enum e_window {
 enum e_minimap {
 	BORDER = 10,
 	RADIUS = 75,
-	CENTER = BORDER + RADIUS,
+	CENTER = RADIUS,
 	C_VISIBLE = 10,
 	C_SIDE_LEN = (RADIUS * 2) / C_VISIBLE,
 	PL_RADIUS = 2
@@ -118,6 +119,7 @@ typedef struct s_mlx {
 	void	*mlx;
 	void	*win;
 	t_img	img;
+	t_img	minimap;
 	int		fps;
 }	t_mlx;
 
@@ -150,6 +152,7 @@ void	ft_move_player(t_vars *vars);
 t_coor	ft_get_hit_wall(t_vars *vars, double angle, int *direction);
 
 /************************[ Rendering ]************************/
+int		ft_init_images(t_vars *vars);
 int		frame_rendering(t_vars *vars);
 void	ft_render_minimap(t_vars *vars);
 void	ft_draw_rays(t_vars *vars, t_circle minimap);

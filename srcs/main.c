@@ -6,7 +6,7 @@
 /*   By: hel-makh <hel-makh@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/05 11:49:49 by hel-makh          #+#    #+#             */
-/*   Updated: 2022/06/27 01:16:05 by hel-makh         ###   ########.fr       */
+/*   Updated: 2022/06/29 11:24:48 by hel-makh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,9 +37,12 @@ int	main(int argc, char **argv)
 		return (EXIT_FAILURE);
 	ft_get_player_position(&vars);
 	vars.mlx.fps = 1000;
-	vars.mlx.img.img = NULL;
 	vars.mlx.mlx = mlx_init();
+	if (!vars.mlx.mlx)
+		return (printf("Error\nCouldn't initialize mlx.\n"), EXIT_FAILURE);
 	vars.mlx.win = mlx_new_window(vars.mlx.mlx, WIDTH, HEIGHT, "cub3d");
+	if (!ft_init_images(&vars))
+		return (printf("Error\nCouldn't create images.\n"), EXIT_FAILURE);
 	mlx_hook(vars.mlx.win, 02, (1L << 0), key_press, &vars);
 	mlx_hook(vars.mlx.win, 03, (1L << 1), key_release, &vars);
 	mlx_hook(vars.mlx.win, 17, 0L, exit_game, &vars);
