@@ -6,7 +6,7 @@
 /*   By: hel-makh <hel-makh@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/05 11:43:14 by hel-makh          #+#    #+#             */
-/*   Updated: 2022/06/28 14:36:44 by hel-makh         ###   ########.fr       */
+/*   Updated: 2022/06/29 09:38:31 by hel-makh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,8 @@
 # define USAGE	"Usage: ./cub3d <file.cub>"
 
 /***********************[ Enumeration ]***********************/
-#if defined(__linux__)
+# if defined(__linux__)
+
 enum e_keycodes {
 	KEY_ESC = 65307,
 	KEY_A = 97,
@@ -38,7 +39,8 @@ enum e_keycodes {
 	KEY_RIGHT = 65363,
 	KEY_DOWN = 65364
 };
-#elif defined(__APPLE__) && defined(__MACH__)
+# elif defined(__APPLE__) && defined(__MACH__)
+
 enum e_keycodes {
 	KEY_ESC = 53,
 	KEY_A = 0,
@@ -50,7 +52,7 @@ enum e_keycodes {
 	KEY_RIGHT = 124,
 	KEY_DOWN = 125
 };
-#endif
+# endif
 
 enum e_window {
 	WIDTH = 1280,
