@@ -6,7 +6,7 @@
 /*   By: hel-makh <hel-makh@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/05 19:04:43 by hel-makh          #+#    #+#             */
-/*   Updated: 2022/06/29 20:06:05 by hel-makh         ###   ########.fr       */
+/*   Updated: 2022/06/30 11:15:04 by hel-makh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,11 +49,11 @@ static int	ft_get_rgb_colors(int *color, char **info)
 static int	ft_open_image(t_vars *vars, t_img *img, char *path)
 {
 	img->img = mlx_xpm_file_to_image(vars->mlx.mlx, path,
-		&img->width, &img->height);
+			&img->width, &img->height);
 	if (!img->img)
 		return (printf("Error\nCouldn't load texture: %s\n", path), 0);
 	img->data = (int *)mlx_get_data_addr(img->img, &img->bpp,
-		&img->line_len, &img->endian);
+			&img->line_len, &img->endian);
 	return (1);
 }
 
