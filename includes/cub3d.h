@@ -6,7 +6,7 @@
 /*   By: hel-makh <hel-makh@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/05 11:43:14 by hel-makh          #+#    #+#             */
-/*   Updated: 2022/06/29 20:59:41 by hel-makh         ###   ########.fr       */
+/*   Updated: 2022/07/01 20:52:57 by hel-makh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,11 @@ typedef struct s_circle {
 	double	radius;
 }	t_circle;
 
+typedef struct s_dim {
+	double	width;
+	double	height;
+}	t_dim;
+
 typedef struct s_coor {
 	double	x;
 	double	y;
@@ -132,6 +137,16 @@ typedef struct s_vars {
 	t_player	player;
 }	t_vars;
 
+typedef struct s_render {
+	double	degree;
+	double	angle;
+	t_coor	hit_wall;
+	int		direc;
+	double	dist;
+	t_dim	wall_dim;
+	double	wall_orig_height;
+}	t_render;
+
 /**************************[ Utils ]**************************/
 long	ft_get_current_time(void);
 int		ft_create_trgb(int t, int r, int g, int b);
@@ -160,6 +175,7 @@ int		frame_rendering(t_vars *vars);
 void	ft_render_minimap(t_vars *vars);
 void	ft_draw_rays(t_vars *vars, t_circle minimap);
 void	ft_render_3d_scene(t_vars *vars);
+void	ft_draw_floor_ceilling(t_vars *vars);
 
 /**************************[ Other ]**************************/
 int		ft_exit_game(t_vars *vars, int exit_status);

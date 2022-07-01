@@ -6,7 +6,7 @@
 #    By: hel-makh <hel-makh@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/05 11:42:59 by hel-makh          #+#    #+#              #
-#    Updated: 2022/06/29 17:24:56 by hel-makh         ###   ########.fr        #
+#    Updated: 2022/07/01 20:51:42 by hel-makh         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,6 +30,7 @@ FILES			=	utils/ft_get_current_time.c\
 					rendering/ft_render_minimap.c\
 					rendering/ft_draw_rays.c\
 					rendering/ft_render_3d_scene.c\
+					rendering/ft_draw_floor_ceilling.c\
 					other/ft_exit_game.c\
 					main.c
 
