@@ -6,7 +6,7 @@
 /*   By: hel-makh <hel-makh@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 11:06:14 by hel-makh          #+#    #+#             */
-/*   Updated: 2022/06/29 20:59:35 by hel-makh         ###   ########.fr       */
+/*   Updated: 2022/07/01 23:31:12 by hel-makh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static void	ft_draw_line(t_vars *vars, t_coor dest, t_circle minimap)
 		steps = 1;
 	inc.x = dest.x / steps;
 	inc.y = dest.y / steps;
-	steps *= C_SIDE_LEN - 1;
+	steps *= C_SIDE_LEN;
 	coor.x = minimap.x;
 	coor.y = minimap.y;
 	while (steps >= 0 && ft_is_in_circle(coor.x, coor.y, minimap) == 1)
