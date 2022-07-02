@@ -6,7 +6,7 @@
 /*   By: hel-makh <hel-makh@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 19:53:41 by hel-makh          #+#    #+#             */
-/*   Updated: 2022/06/29 11:32:15 by hel-makh         ###   ########.fr       */
+/*   Updated: 2022/07/02 14:04:03 by hel-makh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ void	ft_render_minimap(t_vars *vars)
 
 	minimap.x = CENTER;
 	minimap.y = CENTER;
-	minimap.radius = RADIUS;
+	minimap.radius = RADIUS - 1;
 	ft_draw_circle(vars->mlx.minimap.data, minimap,
 		ft_create_trgb(0, 105, 105, 105));
 	ft_draw_map_components(vars, minimap);

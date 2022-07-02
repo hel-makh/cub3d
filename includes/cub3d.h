@@ -6,7 +6,7 @@
 /*   By: hel-makh <hel-makh@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/05 11:43:14 by hel-makh          #+#    #+#             */
-/*   Updated: 2022/07/01 20:52:57 by hel-makh         ###   ########.fr       */
+/*   Updated: 2022/07/02 14:03:25 by hel-makh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ enum e_minimap {
 
 enum e_player {
 	SPEED = 3,
-	ROT_SPEED = 4,
+	ROT_SPEED = 3,
 	FOV	= 60
 };
 
