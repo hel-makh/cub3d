@@ -6,7 +6,7 @@
 /*   By: ybensell <ybensell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/05 11:43:14 by hel-makh          #+#    #+#             */
-/*   Updated: 2022/07/02 14:33:04 by ybensell         ###   ########.fr       */
+/*   Updated: 2022/07/02 15:15:30 by ybensell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ enum e_minimap {
 
 enum e_player {
 	SPEED = 3,
-	ROT_SPEED = 4,
+	ROT_SPEED = 3,
 	FOV	= 60
 };
 
