@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ybensell <ybensell@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hel-makh <hel-makh@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/05 11:43:14 by hel-makh          #+#    #+#             */
-/*   Updated: 2022/07/02 15:15:30 by ybensell         ###   ########.fr       */
+/*   Updated: 2022/07/02 16:10:09 by hel-makh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,7 @@ enum e_minimap {
 enum e_player {
 	SPEED = 3,
 	ROT_SPEED = 3,
+	MOUSE_ROT_SPEED = 2,
 	FOV	= 60
 };
 
@@ -100,7 +101,6 @@ typedef struct s_player {
 	double	angle;
 	t_coor	dir;
 	t_coor	move;
-	t_coor	rot;
 	double	rotate;
 }	t_player;
 
@@ -165,8 +165,8 @@ int		ft_component_surroundings(char **map, int i, int j);
 void	ft_get_player_position(t_vars *vars);
 int		key_press(int keycode, t_vars *vars);
 int		key_release(int keycode, t_vars *vars);
-void	ft_move_player(t_vars *vars);
 int		mouse_rotation(int x,int y, t_vars *vars);
+void	ft_move_player(t_vars *vars);
 
 /************************[ RayCasting ]***********************/
 t_coor	ft_get_hit_wall(t_vars *vars, double angle, int *direction);
