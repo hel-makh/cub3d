@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_render_3d_scene.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hel-makh <hel-makh@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: ybensell <ybensell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/26 11:04:10 by hel-makh          #+#    #+#             */
-/*   Updated: 2022/07/01 21:04:21 by hel-makh         ###   ########.fr       */
+/*   Updated: 2022/07/02 11:27:56 by ybensell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ static void	ft_draw_wall(t_vars *vars, t_render *render)
 	int	y;
 	int	ty;
 
+	
 	ty = 0;
 	y = (HEIGHT / 2) - (render->wall_dim.height / 2);
 	while (y < (HEIGHT / 2) - (render->wall_dim.height / 2)
@@ -69,6 +70,7 @@ static void	ft_draw_wall(t_vars *vars, t_render *render)
 		ty ++;
 		y ++;
 	}
+	
 }
 
 void	ft_render_3d_scene(t_vars *vars)

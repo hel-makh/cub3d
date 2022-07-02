@@ -3,14 +3,48 @@
 /*                                                        :::      ::::::::   */
 /*   ft_player_movement.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hel-makh <hel-makh@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: ybensell <ybensell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/21 22:27:23 by hel-makh          #+#    #+#             */
-/*   Updated: 2022/06/29 18:53:53 by hel-makh         ###   ########.fr       */
+/*   Updated: 2022/07/02 14:45:44 by ybensell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
+int mouse_rotation(int x, int y, t_vars *vars)
+{
+	double	direction_angle;
+	double rotation_speed;
+	(void)y;
+
+	rotation_speed = fabs(vars->player.rot.x - x);
+	if (x < vars->player.rot.x)
+	{
+		vars->player.rotate = -1;
+		vars->player.rot.x = x;
+	}
+	else if (x > vars->player.rot.x)
+	{
+		vars->player.rotate = 1;
+		vars->player.rot.x = x;
+	}
+	vars->player.angle = ft_radian_operations(vars->player.angle,
+				(vars->player.rotate * rotation_speed) / vars->mlx.fps);
+	direction_angle = vars->player.angle;
+	if (vars->player.move.y == -1)
+		direction_angle = ft_radian_operations(direction_angle, M_PI);
+	else if (vars->player.move.x)
+		direction_angle = ft_radian_operations(direction_angle,
+				-vars->player.move.x * M_PI_2);
+	if (vars->player.move.x && vars->player.move.y)
+		direction_angle = ft_radian_operations(direction_angle,
+				vars->player.move.x * M_PI_4);
+	vars->player.dir.x = cos(direction_angle);
+	vars->player.dir.y = sin(direction_angle);
+	vars->player.rotate = 0;
+	return 0;
+}
+
 
 static void	ft_get_player_direction(t_vars *vars)
 {

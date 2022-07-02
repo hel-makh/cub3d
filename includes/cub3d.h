@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hel-makh <hel-makh@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: ybensell <ybensell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/05 11:43:14 by hel-makh          #+#    #+#             */
-/*   Updated: 2022/07/01 20:52:57 by hel-makh         ###   ########.fr       */
+/*   Updated: 2022/07/02 14:33:04 by ybensell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,6 +100,7 @@ typedef struct s_player {
 	double	angle;
 	t_coor	dir;
 	t_coor	move;
+	t_coor	rot;
 	double	rotate;
 }	t_player;
 
@@ -165,6 +166,7 @@ void	ft_get_player_position(t_vars *vars);
 int		key_press(int keycode, t_vars *vars);
 int		key_release(int keycode, t_vars *vars);
 void	ft_move_player(t_vars *vars);
+int		mouse_rotation(int x,int y, t_vars *vars);
 
 /************************[ RayCasting ]***********************/
 t_coor	ft_get_hit_wall(t_vars *vars, double angle, int *direction);
