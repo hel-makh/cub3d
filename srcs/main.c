@@ -6,7 +6,7 @@
 /*   By: hel-makh <hel-makh@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/05 11:49:49 by hel-makh          #+#    #+#             */
-/*   Updated: 2022/07/02 15:50:02 by hel-makh         ###   ########.fr       */
+/*   Updated: 2022/07/03 10:31:51 by hel-makh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ static void	ft_init_mlx(t_vars *vars)
 		printf("Error\nCouldn't initialize mlx.\n");
 		exit(EXIT_FAILURE);
 	}
+	mlx_mouse_hide();
 }
 
 int	main(int argc, char **argv)

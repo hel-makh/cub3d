@@ -6,7 +6,7 @@
 #    By: hel-makh <hel-makh@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/05 11:42:59 by hel-makh          #+#    #+#              #
-#    Updated: 2022/07/03 10:27:03 by hel-makh         ###   ########.fr        #
+#    Updated: 2022/07/03 10:32:54 by hel-makh         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -67,11 +67,11 @@ LIBFT			=	$(LIBFT_DIR)/libft.a
 RM				=	rm -rf
 
 $(OBJS_DIR)%.o:$(SRCS_DIR)%.c		$(HEADER)
-					make -C $(MLX_DIR)
 					@mkdir -p $(shell dirname $@)
 					$(CC) $(CFLAGS) $(MLX_IFLAGS) -c $< -o $@
 
 $(NAME):			$(HEADER) $(OBJS) $(LIBFT) $(MLX)
+					make -C $(MLX_DIR)
 					$(CC) $(CFLAGS) $(OBJS) $(LIBFT) $(MLX) $(MLX_LFLAGS) -o $(NAME)
 
 all:				$(NAME)
@@ -82,11 +82,11 @@ $(LIBFT):
 clean:
 					$(RM) $(OBJS_DIR)
 					make clean -C $(LIBFT_DIR)
-					make clean -C $(MLX_DIR)
 
 fclean:				clean
 					$(RM) $(NAME)
 					make fclean -C $(LIBFT_DIR)
+					make clean -C $(MLX_DIR)
 
 re:					fclean all
 

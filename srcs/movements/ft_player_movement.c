@@ -6,7 +6,7 @@
 /*   By: hel-makh <hel-makh@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/21 22:27:23 by hel-makh          #+#    #+#             */
-/*   Updated: 2022/07/02 16:12:27 by hel-makh         ###   ########.fr       */
+/*   Updated: 2022/07/03 10:38:51 by hel-makh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,13 @@
 
 int	mouse_rotation(int x, int y, t_vars *vars)
 {
-	static int	old_x;
-	double		diff;
+	double	diff;
 	(void)y;
 
-	if (!old_x)
-		old_x = x;
-	diff = x - old_x;
+	diff = x - (WIDTH / 2);
 	vars->player.angle = ft_radian_operations(vars->player.angle,
-				(diff / vars->mlx.fps) * ((double)MOUSE_ROT_SPEED / 20));
-	old_x = x;
+				(diff / vars->mlx.fps) * (MOUSE_ROT_SPEED / 500.0));
+	mlx_mouse_move(vars->mlx.win, WIDTH / 2, HEIGHT / 2);
 	return (0);
 }
 
@@ -33,7 +30,7 @@ static void	ft_get_player_direction(t_vars *vars)
 
 	if (vars->player.rotate)
 		vars->player.angle = ft_radian_operations(vars->player.angle,
-				(vars->player.rotate * ROT_SPEED) / vars->mlx.fps);
+				(vars->player.rotate / vars->mlx.fps) * (ROT_SPEED / 5.0));
 	direction_angle = vars->player.angle;
 	if (vars->player.move.y == -1)
 		direction_angle = ft_radian_operations(direction_angle, M_PI);
@@ -55,11 +52,11 @@ void	ft_move_player(t_vars *vars)
 	if (!vars->player.move.x && !vars->player.move.y)
 		return ;
 	new_pos.x = vars->player.pos.x
-		+ (vars->player.dir.x * SPEED) / vars->mlx.fps;
+		+ (vars->player.dir.x / vars->mlx.fps) * (SPEED / 5.0);
 	if (vars->map.map[(int)vars->player.pos.y][(int)new_pos.x] != '1')
 		vars->player.pos.x = new_pos.x;
 	new_pos.y = vars->player.pos.y
-		+ (vars->player.dir.y * SPEED) / vars->mlx.fps;
+		+ (vars->player.dir.y / vars->mlx.fps) * (SPEED / 5.0);
 	if (vars->map.map[(int)new_pos.y][(int)vars->player.pos.x] != '1')
 		vars->player.pos.y = new_pos.y;
 }
