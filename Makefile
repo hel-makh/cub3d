@@ -6,7 +6,7 @@
 #    By: hel-makh <hel-makh@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/05 11:42:59 by hel-makh          #+#    #+#              #
-#    Updated: 2022/07/01 20:51:42 by hel-makh         ###   ########.fr        #
+#    Updated: 2022/07/03 10:27:03 by hel-makh         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -48,12 +48,16 @@ CFLAGS			=	-Wall -Wextra -Werror
 
 UNAME_S := $(shell uname -s)
 ifeq ($(UNAME_S), Darwin)
-	MLX_IFLAGS	+=	-Imlx
-	MLX_LFLAGS	+=	-lmlx -framework OpenGL -framework AppKit
+	MLX_DIR		=	mlx_macos
+	MLX			=	$(MLX_DIR)/libmlx.a
+	MLX_IFLAGS	=	-Imlx_macos
+	MLX_LFLAGS	=	-Lmlx_macos -Imlx_macos -framework OpenGL -framework AppKit
 endif
 ifeq ($(UNAME_S), Linux)
-	MLX_IFLAGS	+=	-I/usr/include -Imlx_linux -O3
-	MLX_LFLAGS	+=	-Lmlx_linux -lmlx_Linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz
+	MLX_DIR		=	mlx_linux
+	MLX			=	$(MLX_DIR)/libmlx.a
+	MLX_IFLAGS	=	-I/usr/include -Imlx_linux -O3
+	MLX_LFLAGS	=	-Lmlx_linux -lmlx_Linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz
 endif
 
 LIBFT_DIR		=	./Libft
@@ -63,11 +67,12 @@ LIBFT			=	$(LIBFT_DIR)/libft.a
 RM				=	rm -rf
 
 $(OBJS_DIR)%.o:$(SRCS_DIR)%.c		$(HEADER)
+					make -C $(MLX_DIR)
 					@mkdir -p $(shell dirname $@)
 					$(CC) $(CFLAGS) $(MLX_IFLAGS) -c $< -o $@
 
-$(NAME):			$(HEADER) $(OBJS) $(LIBFT)
-					$(CC) $(CFLAGS) $(OBJS) $(LIBFT) $(MLX_LFLAGS) -o $(NAME)
+$(NAME):			$(HEADER) $(OBJS) $(LIBFT) $(MLX)
+					$(CC) $(CFLAGS) $(OBJS) $(LIBFT) $(MLX) $(MLX_LFLAGS) -o $(NAME)
 
 all:				$(NAME)
 
@@ -77,6 +82,7 @@ $(LIBFT):
 clean:
 					$(RM) $(OBJS_DIR)
 					make clean -C $(LIBFT_DIR)
+					make clean -C $(MLX_DIR)
 
 fclean:				clean
 					$(RM) $(NAME)
