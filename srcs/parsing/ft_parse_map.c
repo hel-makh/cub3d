@@ -6,7 +6,7 @@
 /*   By: hel-makh <hel-makh@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/07 13:48:05 by hel-makh          #+#    #+#             */
-/*   Updated: 2022/06/29 12:59:54 by hel-makh         ###   ########.fr       */
+/*   Updated: 2022/07/05 10:50:01 by hel-makh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ static int	ft_read_map(t_map *map, int fd)
 
 static int	ft_check_component(t_map *map, int i, int j, t_content *content)
 {
-	if (!ft_strchr(" 01NSEW", map->map[i][j]))
+	if (!ft_strchr(" 012NSEW", map->map[i][j]))
 	{
 		printf("Error\nInvalid map: Invalid component [%c]."
 			"\nLine: %d, Column: %d\n", map->map[i][j], i + 1, j + 1);
@@ -103,7 +103,7 @@ static int	ft_is_map_closed(t_map *map)
 		j = 0;
 		while (map->map[i][j])
 		{
-			if (ft_strchr(" 0NSEW", map->map[i][j]))
+			if (ft_strchr(" 02NSEW", map->map[i][j]))
 			{
 				if (!ft_component_surroundings(map->map, i, j))
 					return (0);
