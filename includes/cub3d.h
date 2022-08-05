@@ -6,7 +6,7 @@
 /*   By: hel-makh <hel-makh@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/05 11:43:14 by hel-makh          #+#    #+#             */
-/*   Updated: 2022/07/03 12:09:06 by hel-makh         ###   ########.fr       */
+/*   Updated: 2022/08/05 01:41:11 by hel-makh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,20 @@
 
 # define USAGE	"Usage: ./cub3d <file.cub>"
 
+/***********************[ Components ]***********************/
+# define SPACE			' '
+# define EMPTY_SPACE	'0'
+# define WALL			'1'
+# define C_DOOR			'2'
+# define O_DOOR			'3'
+# define P_NORTH		'N'
+# define P_SOUTH		'S'
+# define P_EAST			'E'
+# define P_WEST			'W'
+# define HIT_WALLS		"123"
+# define WALLS			"12"
+# define DOORS			"23"
+
 /***********************[ Enumeration ]***********************/
 # if defined(__linux__)
 
@@ -34,6 +48,7 @@ enum e_keycodes {
 	KEY_W = 119,
 	KEY_D = 100,
 	KEY_S = 115,
+	KEY_E = 101,
 	KEY_LEFT = 65361,
 	KEY_UP = 65362,
 	KEY_RIGHT = 65363,
@@ -76,7 +91,7 @@ enum e_player {
 	SPEED = 15,
 	ROT_SPEED = 10,
 	MOUSE_ROT_SPEED = 13,
-	FOV	= 60
+	FOV	= 75
 };
 
 /************************[ Structers ]************************/
@@ -95,6 +110,13 @@ typedef struct s_coor {
 	double	x;
 	double	y;
 }	t_coor;
+
+typedef struct s_door {
+	int				x;
+	int				y;
+	double			frame;
+	struct s_door	*next;
+}	t_door;
 
 typedef struct s_player {
 	t_coor	pos;
@@ -122,6 +144,9 @@ typedef struct s_map {
 	t_img	south;
 	t_img	west;
 	t_img	east;
+	t_img	*door;
+	int		door_frames;
+	t_door	*doors;
 }	t_map;
 
 typedef struct s_mlx {
@@ -139,25 +164,39 @@ typedef struct s_vars {
 }	t_vars;
 
 typedef struct s_render {
-	double	degree;
-	double	angle;
-	t_coor	hit_wall;
-	int		direc;
-	double	dist;
-	t_dim	wall_dim;
-	double	wall_orig_height;
+	double			degree;
+	double			angle;
+	t_coor			hit_wall;
+	int				direc;
+	double			dist;
+	t_dim			wall_dim;
+	double			wall_orig_height;
+	struct s_render	*next;
 }	t_render;
 
 /**************************[ Utils ]**************************/
 long	ft_get_current_time(void);
 int		ft_create_trgb(int t, int r, int g, int b);
-double	ft_radian_operations(double radian, double amout);
 double	ft_get_distance(t_coor poin1, t_coor point2);
 int		ft_is_in_circle(double x, double y, t_circle circle);
+double	ft_rtod(double radian);
+double	ft_dtor(double degree);
+double	ft_radian_operations(double radian, double amout);
+
+t_door	*ft_door_lstnew(int x, int y);
+void	ft_door_lstadd_front(t_door **lst, t_door *new);
+void	ft_door_lstdel(t_door **lst, int x, int y);
+void	ft_door_lstclear(t_door **lst);
+int		ft_door_frame(t_door *lst, int x, int y);
+
+t_render	*ft_render_lstnew(void);
+void		ft_render_lstadd_front(t_render **lst, t_render *new);
+void		ft_render_lstclear(t_render **lst);
 
 /*************************[ Parsing ]*************************/
 int		ft_import_map(t_vars *vars, char *file);
 int		ft_parse_textures(t_vars *vars, int fd);
+int		ft_get_textures(t_vars *vars, char **info);
 int		ft_parse_map(t_map *map, int fd);
 int		ft_component_surroundings(char **map, int i, int j);
 
@@ -169,7 +208,8 @@ int		mouse_rotation(int x, int y, t_vars *vars);
 void	ft_move_player(t_vars *vars);
 
 /************************[ RayCasting ]***********************/
-t_coor	ft_get_hit_wall(t_vars *vars, double angle, int *direction);
+t_coor	ft_get_hit_wall(t_vars *vars, t_coor start_pos,
+			double angle, int *direction);
 
 /************************[ Rendering ]************************/
 int		ft_init_images(t_vars *vars);
@@ -178,6 +218,8 @@ void	ft_render_minimap(t_vars *vars);
 void	ft_draw_rays(t_vars *vars, t_circle minimap);
 void	ft_render_3d_scene(t_vars *vars);
 void	ft_draw_floor_ceilling(t_vars *vars);
+void	ft_door_animation(t_vars *vars);
+void	ft_open_close_door(t_vars *vars);
 
 /**************************[ Other ]**************************/
 int		ft_exit_game(t_vars *vars, int exit_status);

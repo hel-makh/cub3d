@@ -6,7 +6,7 @@
 #    By: hel-makh <hel-makh@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/05 11:42:59 by hel-makh          #+#    #+#              #
-#    Updated: 2022/07/03 12:11:30 by hel-makh         ###   ########.fr        #
+#    Updated: 2022/08/04 16:17:49 by hel-makh         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,15 +18,20 @@ FILES			=	utils/ft_get_current_time.c\
 					utils/ft_create_trgb.c\
 					utils/ft_get_distance.c\
 					utils/ft_is_in_circle.c\
+					utils/ft_radian_degree.c\
 					utils/ft_radian_operations.c\
+					utils/ft_door_lstfuncs.c\
+					utils/ft_render_lstfuncs.c\
 					parsing/ft_import_map.c\
 					parsing/ft_parse_textures.c\
+					parsing/ft_get_textures.c\
 					parsing/ft_parse_map.c\
 					parsing/ft_component_surroundings.c\
 					movements/ft_get_player_position.c\
 					movements/ft_player_movement.c\
 					raycasting/ft_get_hit_wall.c\
 					rendering/ft_frame_rendering.c\
+					rendering/ft_door_opening.c\
 					rendering/ft_render_minimap.c\
 					rendering/ft_draw_rays.c\
 					rendering/ft_render_3d_scene.c\

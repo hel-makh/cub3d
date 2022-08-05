@@ -6,7 +6,7 @@
 /*   By: hel-makh <hel-makh@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/07 13:48:05 by hel-makh          #+#    #+#             */
-/*   Updated: 2022/07/05 10:50:01 by hel-makh         ###   ########.fr       */
+/*   Updated: 2022/07/20 13:02:19 by hel-makh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,18 +49,18 @@ static int	ft_read_map(t_map *map, int fd)
 
 static int	ft_check_component(t_map *map, int i, int j, t_content *content)
 {
-	if (!ft_strchr(" 012NSEW", map->map[i][j]))
+	if (!ft_strchr(" 0123NSEW", map->map[i][j]))
 	{
 		printf("Error\nInvalid map: Invalid component [%c]."
 			"\nLine: %d, Column: %d\n", map->map[i][j], i + 1, j + 1);
 		return (0);
 	}
-	if (map->map[i][j] == '0')
+	if (map->map[i][j] == EMPTY_SPACE)
 		content->space ++;
-	else if (map->map[i][j] == '1')
+	else if (map->map[i][j] == WALL)
 		content->wall ++;
-	else if (map->map[i][j] == 'N' || map->map[i][j] == 'S'
-			|| map->map[i][j] == 'E' || map->map[i][j] == 'W')
+	else if (map->map[i][j] == P_NORTH || map->map[i][j] == P_SOUTH
+			|| map->map[i][j] == P_EAST || map->map[i][j] == P_WEST)
 		content->player ++;
 	return (1);
 }
@@ -103,7 +103,7 @@ static int	ft_is_map_closed(t_map *map)
 		j = 0;
 		while (map->map[i][j])
 		{
-			if (ft_strchr(" 02NSEW", map->map[i][j]))
+			if (ft_strchr(" 023NSEW", map->map[i][j]))
 			{
 				if (!ft_component_surroundings(map->map, i, j))
 					return (0);

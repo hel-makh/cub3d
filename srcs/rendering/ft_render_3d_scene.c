@@ -6,7 +6,7 @@
 /*   By: hel-makh <hel-makh@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/26 11:04:10 by hel-makh          #+#    #+#             */
-/*   Updated: 2022/07/02 15:29:49 by hel-makh         ###   ########.fr       */
+/*   Updated: 2022/08/05 01:39:48 by hel-makh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,16 @@
 #define RADIAN_INC	0.06
 
 static int
-	ft_get_texture_pixel(t_img img, t_render *render, double hit_point, int ty)
+	ft_get_texture_pixel(t_img img, t_render *render, int ty)
 {
 	int		tx;
 	double	ty_step;
 	double	ty_off;
 
-	tx = img.width * (hit_point - (int)hit_point);
+	if (render->direc == 'h')
+		tx = img.width * (render->hit_wall.x - (int)render->hit_wall.x);
+	else
+		tx = img.width * (render->hit_wall.y - (int)render->hit_wall.y);
 	ty_step = img.height / render->wall_orig_height;
 	ty_off = 0;
 	if (render->wall_orig_height > HEIGHT)
@@ -32,66 +35,98 @@ static int
 
 static void	ft_draw_pixel(t_vars *vars, t_render *render, int *data, int ty)
 {
-	if (render->direc == 'h' && render->angle < M_PI)
-		*data = ft_get_texture_pixel(vars->map.north, render,
-				render->hit_wall.x, ty);
+	t_img	*img;
+	int		color;
+
+	if (ft_strchr(DOORS, vars->map.map[(int)render->hit_wall.y]
+			[(int)render->hit_wall.x]))
+		img = &vars->map.door[ft_door_frame(vars->map.doors,
+				render->hit_wall.x, render->hit_wall.y)];
+	else if (render->direc == 'h' && render->angle < M_PI)
+		img = &vars->map.north;
 	else if (render->direc == 'h' && render->angle < 2 * M_PI)
-		*data = ft_get_texture_pixel(vars->map.south, render,
-				render->hit_wall.x, ty);
+		img = &vars->map.south;
 	else if (render->direc == 'v'
 		&& (render->angle < M_PI_2 || render->angle > M_PI + M_PI_2))
-		*data = ft_get_texture_pixel(vars->map.east, render,
-				render->hit_wall.y, ty);
-	else if (render->direc == 'v'
-		&& (render->angle > M_PI_2 && render->angle < M_PI + M_PI_2))
-		*data = ft_get_texture_pixel(vars->map.west, render,
-				render->hit_wall.y, ty);
+		img = &vars->map.east;
+	else /*if (render->direc == 'v'
+		&& (render->angle > M_PI_2 && render->angle < M_PI + M_PI_2))*/
+		img = &vars->map.west;
+	color = ft_get_texture_pixel(*img, render, ty);
+	if (color != -16777216)
+		*data = color;
 }
 
-static void	ft_draw_wall(t_vars *vars, t_render *render)
+static void	ft_draw_walls(t_vars *vars, t_render *render)
 {
 	int	x;
 	int	y;
 	int	ty;
 
-	ty = 0;
-	y = (HEIGHT / 2) - (render->wall_dim.height / 2);
-	while (y < (HEIGHT / 2) - (render->wall_dim.height / 2)
-		+ render->wall_dim.height && y < HEIGHT)
+	while (render)
 	{
-		x = (render->degree / RADIAN_INC) * render->wall_dim.width;
-		while (x < ((render->degree / RADIAN_INC) * render->wall_dim.width)
-			+ render->wall_dim.width && x < WIDTH)
+		ty = 0;
+		y = (HEIGHT / 2) - (render->wall_dim.height / 2);
+		while (y < (HEIGHT / 2) - (render->wall_dim.height / 2)
+			+ render->wall_dim.height && y < HEIGHT)
 		{
-			ft_draw_pixel(vars, render, &vars->mlx.img.data[y * WIDTH + x], ty);
-			x ++;
+			x = (render->degree / RADIAN_INC) * render->wall_dim.width;
+			while (x < ((render->degree / RADIAN_INC) * render->wall_dim.width)
+				+ render->wall_dim.width && x < WIDTH)
+			{
+				ft_draw_pixel(vars, render,
+					&vars->mlx.img.data[y * WIDTH + x], ty);
+				x ++;
+			}
+			ty ++;
+			y ++;
 		}
-		ty ++;
-		y ++;
+		render = render->next;
 	}
+}
+
+static void	ft_get_wall_dims(t_vars *vars, t_render *render,
+	t_coor start_pos, double degree)
+{
+	render->degree = degree;
+	render->hit_wall = ft_get_hit_wall(vars, start_pos,
+			render->angle, &render->direc);
+	render->dist = ft_get_distance(vars->player.pos, render->hit_wall)
+		* cos(ft_radian_operations(vars->player.angle, -render->angle));
+	render->wall_dim.width = WIDTH / (FOV / RADIAN_INC);
+	render->wall_dim.height = HEIGHT;
+	if (render->dist > 0)
+		render->wall_dim.height = HEIGHT / render->dist;
+	render->wall_orig_height = render->wall_dim.height;
+	if (render->wall_dim.height > HEIGHT)
+		render->wall_dim.height = HEIGHT;
 }
 
 void	ft_render_3d_scene(t_vars *vars)
 {
-	t_render	render;
+	t_render	*render;
+	t_render	*temp;
+	double		degree;
 
 	ft_draw_floor_ceilling(vars);
-	render.degree = 0;
-	while (render.degree <= FOV)
+	render = NULL;
+	degree = 0;
+	while (degree <= FOV)
 	{
-		render.angle = ft_radian_operations(vars->player.angle,
-				(render.degree - (FOV / 2)) * (M_PI / 180));
-		render.hit_wall = ft_get_hit_wall(vars, render.angle, &render.direc);
-		render.dist = ft_get_distance(vars->player.pos, render.hit_wall)
-			* cos(ft_radian_operations(vars->player.angle, -render.angle));
-		render.wall_dim.width = WIDTH / (FOV / RADIAN_INC);
-		render.wall_dim.height = HEIGHT;
-		if (render.dist > 0)
-			render.wall_dim.height = HEIGHT / render.dist;
-		render.wall_orig_height = render.wall_dim.height;
-		if (render.wall_dim.height > HEIGHT)
-			render.wall_dim.height = HEIGHT;
-		ft_draw_wall(vars, &render);
-		render.degree += RADIAN_INC;
+		while (!render || (render && vars->map.map[(int)render->hit_wall.y]
+				[(int)render->hit_wall.x] != WALL))
+		{
+			temp = ft_render_lstnew();
+			temp->angle = ft_radian_operations(vars->player.angle,
+					ft_dtor(degree - (FOV / 2)));
+			if (!render)
+				ft_get_wall_dims(vars, temp, vars->player.pos, degree);
+			else
+				ft_get_wall_dims(vars, temp, render->hit_wall, degree);
+			ft_render_lstadd_front(&render, temp);
+		}
+		ft_draw_walls(vars, render);
+		ft_render_lstclear(&render);
+		degree += RADIAN_INC;
 	}
 }

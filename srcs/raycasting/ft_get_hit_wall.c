@@ -6,7 +6,7 @@
 /*   By: hel-makh <hel-makh@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 11:06:14 by hel-makh          #+#    #+#             */
-/*   Updated: 2022/06/28 14:27:10 by hel-makh         ###   ########.fr       */
+/*   Updated: 2022/08/03 00:11:42 by hel-makh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,41 +54,42 @@ static t_coor	ft_get_vertic_hit_wall(t_coor point, double angle)
 	return (hit_line);
 }
 
-static t_coor	ft_get_direc_hit_wall(t_vars *vars, double angle, int direction)
+static t_coor	ft_get_direc_hit_wall(t_vars *vars, t_coor start_pos,
+	double angle, t_coor (*ft_hit_wall)(t_coor, double))
 {
 	t_coor	wall;
 	t_coor	dist;
 
-	if (direction == 'h')
-	{
-		wall = ft_get_horiz_hit_wall(vars->player.pos, angle);
-		dist = ft_get_horiz_hit_wall(wall, angle);
-	}
-	else
-	{
-		wall = ft_get_vertic_hit_wall(vars->player.pos, angle);
-		dist = ft_get_vertic_hit_wall(wall, angle);
-	}
+	wall = ft_hit_wall(start_pos, angle);
+	dist = ft_hit_wall(wall, angle);
 	dist.x = dist.x - wall.x;
 	dist.y = dist.y - wall.y;
 	while ((dist.x || dist.y) && (int)wall.y >= 0 && (int)wall.x >= 0
 		&& (int)wall.y < (int)ft_arrlen(vars->map.map)
 		&& (int)wall.x < (int)ft_strlen(vars->map.map[(int)wall.y])
-		&& vars->map.map[(int)wall.y][(int)wall.x] != '1')
+		&& !ft_strchr(HIT_WALLS, vars->map.map[(int)wall.y][(int)wall.x]))
 	{
 		wall.x += dist.x;
 		wall.y += dist.y;
 	}
+	if ((int)wall.y >= 0 && (int)wall.x >= 0
+		&& (int)wall.y < (int)ft_arrlen(vars->map.map)
+		&& (int)wall.x < (int)ft_strlen(vars->map.map[(int)wall.y])
+		&& !ft_strchr(HIT_WALLS, vars->map.map[(int)wall.y][(int)wall.x]))
+		return (start_pos);
 	return (wall);
 }
 
-t_coor	ft_get_hit_wall(t_vars *vars, double angle, int *direction)
+t_coor	ft_get_hit_wall(t_vars *vars, t_coor start_pos,
+	double angle, int *direction)
 {
 	t_coor	h_wall;
 	t_coor	v_wall;
 
-	h_wall = ft_get_direc_hit_wall(vars, angle, 'h');
-	v_wall = ft_get_direc_hit_wall(vars, angle, 'v');
+	h_wall = ft_get_direc_hit_wall(vars, start_pos,
+			angle, &ft_get_horiz_hit_wall);
+	v_wall = ft_get_direc_hit_wall(vars, start_pos,
+			angle, &ft_get_vertic_hit_wall);
 	if (ft_get_distance(vars->player.pos, h_wall)
 		< ft_get_distance(vars->player.pos, v_wall))
 	{

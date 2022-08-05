@@ -3,6 +3,8 @@ SO ./textures/wall_south.xpm
 WE ./textures/wall_west.xpm
 EA ./textures/wall_east.xpm
 
+DO ./textures/door1.xpm ./textures/door2.xpm ./textures/door3.xpm ./textures/door4.xpm ./textures/door5.xpm ./textures/door6.xpm ./textures/door7.xpm ./textures/door8.xpm ./textures/door9.xpm ./textures/door10.xpm
+
 F 116,84,20
 C 135,206,235
 
