@@ -6,7 +6,7 @@
 /*   By: hel-makh <hel-makh@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/05 14:03:39 by hel-makh          #+#    #+#             */
-/*   Updated: 2022/08/02 23:27:35 by hel-makh         ###   ########.fr       */
+/*   Updated: 2022/08/06 13:19:05 by hel-makh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,8 @@ static void	ft_init_map_vars(t_map *map)
 	map->south.img = NULL;
 	map->west.img = NULL;
 	map->east.img = NULL;
-	map->door = NULL;
+	map->door.img = NULL;
+	map->door.frames = 0;
 	map->doors = NULL;
 }
 

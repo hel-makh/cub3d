@@ -6,7 +6,7 @@
 /*   By: hel-makh <hel-makh@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/05 11:43:14 by hel-makh          #+#    #+#             */
-/*   Updated: 2022/08/05 01:41:11 by hel-makh         ###   ########.fr       */
+/*   Updated: 2022/08/06 13:47:31 by hel-makh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,6 +136,11 @@ typedef struct s_img {
 	int		height;
 }	t_img;
 
+typedef struct s_spr {
+	t_img	*img;
+	int		frames;
+}	t_spr;
+
 typedef struct s_map {
 	char	**map;
 	int		ce_color;
@@ -144,8 +149,7 @@ typedef struct s_map {
 	t_img	south;
 	t_img	west;
 	t_img	east;
-	t_img	*door;
-	int		door_frames;
+	t_spr	door;
 	t_door	*doors;
 }	t_map;
 

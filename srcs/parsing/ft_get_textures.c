@@ -6,7 +6,7 @@
 /*   By: hel-makh <hel-makh@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/11 12:00:44 by hel-makh          #+#    #+#             */
-/*   Updated: 2022/08/05 01:40:11 by hel-makh         ###   ########.fr       */
+/*   Updated: 2022/08/06 13:18:27 by hel-makh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,18 +46,18 @@ static int	ft_open_image(t_vars *vars, t_img *img, char *path)
 }
 
 static int
-	ft_get_sprites(t_vars *vars, t_img **sprites, int *frames, char **paths)
+	ft_get_sprite(t_vars *vars, t_spr *sprite, char **paths)
 {
 	int	i;
 
-	*sprites = ft_calloc(ft_arrlen(paths) + 1, sizeof(t_img));
-	if (!*sprites)
+	sprite->img = ft_calloc(ft_arrlen(paths) + 1, sizeof(t_img));
+	if (!sprite->img)
 		return (0);
-	*frames = ft_arrlen(paths);
+	sprite->frames = ft_arrlen(paths);
 	i = 0;
 	while (paths[i])
 	{
-		ft_open_image(vars, &(*sprites)[i], paths[i]);
+		ft_open_image(vars, &sprite->img[i], paths[i]);
 		i ++;
 	}
 	return (1);
@@ -74,8 +74,7 @@ int	ft_get_textures(t_vars *vars, char **info)
 	else if (!ft_strcmp(info[0], "EA"))
 		return (ft_open_image(vars, &vars->map.east, info[1]));
 	else if (!ft_strcmp(info[0], "DO"))
-		return (ft_get_sprites(vars, &vars->map.door,
-				&vars->map.door_frames, &info[1]));
+		return (ft_get_sprite(vars, &vars->map.door, &info[1]));
 	else if (!ft_strcmp(info[0], "F"))
 		return (ft_get_rgb_colors(&vars->map.fl_color, info));
 	else if (!ft_strcmp(info[0], "C"))

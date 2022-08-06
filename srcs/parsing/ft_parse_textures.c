@@ -6,7 +6,7 @@
 /*   By: hel-makh <hel-makh@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/05 19:04:43 by hel-makh          #+#    #+#             */
-/*   Updated: 2022/07/11 12:56:08 by hel-makh         ###   ########.fr       */
+/*   Updated: 2022/08/06 13:11:28 by hel-makh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 static int	ft_is_parsed(t_map *map)
 {
 	if (map->north.img && map->south.img && map->west.img && map->east.img
-		&& map->door && map->fl_color != -1 && map->ce_color != -1)
+		&& map->door.img && map->fl_color != -1 && map->ce_color != -1)
 		return (1);
 	return (0);
 }
@@ -26,7 +26,7 @@ static int	ft_is_duplicated(t_map *map, char **info)
 		|| (!ft_strcmp(info[0], "SO") && map->south.img)
 		|| (!ft_strcmp(info[0], "WE") && map->west.img)
 		|| (!ft_strcmp(info[0], "EA") && map->east.img)
-		|| (!ft_strcmp(info[0], "DO") && map->door)
+		|| (!ft_strcmp(info[0], "DO") && map->door.img)
 		|| (!ft_strcmp(info[0], "F") && map->fl_color != -1)
 		|| (!ft_strcmp(info[0], "C") && map->ce_color != -1))
 		return (printf("Error\nDuplicated textures [%s].\n", info[0]), 1);
