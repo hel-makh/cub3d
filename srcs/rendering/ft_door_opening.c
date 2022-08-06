@@ -6,7 +6,7 @@
 /*   By: hel-makh <hel-makh@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 17:30:10 by hel-makh          #+#    #+#             */
-/*   Updated: 2022/08/05 02:12:17 by hel-makh         ###   ########.fr       */
+/*   Updated: 2022/08/06 13:22:17 by hel-makh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	ft_door_animation(t_vars *vars)
 			new_frame = holder->frame + (50 / vars->mlx.fps);
 		else
 			new_frame = holder->frame - (50 / vars->mlx.fps);
-		if ((int)new_frame < vars->map.door_frames)
+		if ((int)new_frame < vars->map.door.frames)
 			holder->frame = new_frame;
 		if (holder->frame <= 0)
 		{

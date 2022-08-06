@@ -6,7 +6,7 @@
 /*   By: hel-makh <hel-makh@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 11:06:14 by hel-makh          #+#    #+#             */
-/*   Updated: 2022/08/02 15:03:22 by hel-makh         ###   ########.fr       */
+/*   Updated: 2022/08/06 14:29:41 by hel-makh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,10 @@ void	ft_draw_rays(t_vars *vars, t_circle minimap)
 	while (degree <= FOV)
 	{
 		angle = ft_radian_operations(vars->player.angle,
-				(degree - (FOV / 2)) * (M_PI / 180));
+				ft_dtor(degree - (FOV / 2)));
 		hit_wall = ft_get_hit_wall(vars, vars->player.pos, angle, NULL);
+		while (vars->map.map[(int)hit_wall.y][(int)hit_wall.x] == O_DOOR)
+			hit_wall = ft_get_hit_wall(vars, hit_wall, angle, NULL);
 		ft_draw_line(vars, hit_wall, minimap);
 		degree += 2;
 	}

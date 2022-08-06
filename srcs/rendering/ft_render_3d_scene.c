@@ -6,7 +6,7 @@
 /*   By: hel-makh <hel-makh@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/26 11:04:10 by hel-makh          #+#    #+#             */
-/*   Updated: 2022/08/05 01:39:48 by hel-makh         ###   ########.fr       */
+/*   Updated: 2022/08/06 13:22:44 by hel-makh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ static void	ft_draw_pixel(t_vars *vars, t_render *render, int *data, int ty)
 
 	if (ft_strchr(DOORS, vars->map.map[(int)render->hit_wall.y]
 			[(int)render->hit_wall.x]))
-		img = &vars->map.door[ft_door_frame(vars->map.doors,
+		img = &vars->map.door.img[ft_door_frame(vars->map.doors,
 				render->hit_wall.x, render->hit_wall.y)];
 	else if (render->direc == 'h' && render->angle < M_PI)
 		img = &vars->map.north;
