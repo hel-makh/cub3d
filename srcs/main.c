@@ -6,7 +6,7 @@
 /*   By: hel-makh <hel-makh@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/05 11:49:49 by hel-makh          #+#    #+#             */
-/*   Updated: 2022/08/07 17:52:27 by hel-makh         ###   ########.fr       */
+/*   Updated: 2022/08/07 20:58:56 by hel-makh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ static void	ft_init_mlx(t_vars *vars)
 {
 	vars->mlx.win = NULL;
 	vars->mlx.img.img = NULL;
-	vars->mlx.minimap.img = NULL;
 	vars->mlx.fps = 0;
 	vars->mlx.mlx = mlx_init();
 	if (!vars->mlx.mlx)

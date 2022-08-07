@@ -6,7 +6,7 @@
 /*   By: hel-makh <hel-makh@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 11:06:14 by hel-makh          #+#    #+#             */
-/*   Updated: 2022/08/06 14:29:41 by hel-makh         ###   ########.fr       */
+/*   Updated: 2022/08/07 21:09:23 by hel-makh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,8 @@ static void	ft_draw_line(t_vars *vars, t_coor dest, t_circle minimap)
 	coor.y = minimap.y;
 	while (steps >= 0 && ft_is_in_circle(coor.x, coor.y, minimap) == 1)
 	{
-		vars->mlx.minimap.data
-		[(int)round(coor.y) * (RADIUS * 2) + (int)round(coor.x)]
+		vars->mlx.img.data
+		[(int)round(coor.y) * WIDTH + (int)round(coor.x)]
 			= ft_create_trgb(0, 0, 255, 0);
 		coor.x += inc.x;
 		coor.y += inc.y;

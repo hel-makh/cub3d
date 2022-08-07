@@ -6,7 +6,7 @@
 /*   By: hel-makh <hel-makh@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/05 11:43:14 by hel-makh          #+#    #+#             */
-/*   Updated: 2022/08/07 19:05:09 by hel-makh         ###   ########.fr       */
+/*   Updated: 2022/08/07 21:09:06 by hel-makh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ enum e_window {
 enum e_minimap {
 	BORDER = 10,
 	RADIUS = 60,
-	CENTER = RADIUS,
+	CENTER = BORDER + RADIUS,
 	C_VISIBLE = 10,
 	C_SIDE_LEN = (RADIUS * 2) / C_VISIBLE,
 	PL_RADIUS = 2
@@ -158,7 +158,6 @@ typedef struct s_mlx {
 	void	*mlx;
 	void	*win;
 	t_img	img;
-	t_img	minimap;
 	int		fps;
 	double	fspeed;
 }	t_mlx;

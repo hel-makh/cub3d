@@ -6,7 +6,7 @@
 /*   By: hel-makh <hel-makh@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/29 17:24:09 by hel-makh          #+#    #+#             */
-/*   Updated: 2022/08/07 18:59:09 by hel-makh         ###   ########.fr       */
+/*   Updated: 2022/08/07 21:01:36 by hel-makh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ int	ft_exit_game(t_vars *vars, int exit_status)
 	if (vars->mlx.win)
 		mlx_destroy_window(vars->mlx.mlx, vars->mlx.win);
 	ft_destroy_image(vars, &vars->mlx.img);
-	ft_destroy_image(vars, &vars->mlx.minimap);
 	ft_destroy_image(vars, &vars->map.north);
 	ft_destroy_image(vars, &vars->map.south);
 	ft_destroy_image(vars, &vars->map.west);
