@@ -6,7 +6,7 @@
 /*   By: hel-makh <hel-makh@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/11 12:00:44 by hel-makh          #+#    #+#             */
-/*   Updated: 2022/08/06 13:18:27 by hel-makh         ###   ########.fr       */
+/*   Updated: 2022/08/07 01:12:20 by hel-makh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,8 @@ static int
 	i = 0;
 	while (paths[i])
 	{
-		ft_open_image(vars, &sprite->img[i], paths[i]);
+		if (!ft_open_image(vars, &sprite->img[i], paths[i]))
+			return (0);
 		i ++;
 	}
 	return (1);

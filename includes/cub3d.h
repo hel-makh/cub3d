@@ -6,7 +6,7 @@
 /*   By: hel-makh <hel-makh@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/05 11:43:14 by hel-makh          #+#    #+#             */
-/*   Updated: 2022/08/06 16:10:32 by hel-makh         ###   ########.fr       */
+/*   Updated: 2022/08/07 00:13:22 by hel-makh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,15 +73,15 @@ enum e_keycodes {
 # endif
 
 enum e_window {
-	WIDTH = 1280,
-	HEIGHT = 720,
+	WIDTH = 640,
+	HEIGHT = 480,
 	FPS_X = 5,
 	FPS_Y = 15
 };
 
 enum e_minimap {
 	BORDER = 10,
-	RADIUS = 75,
+	RADIUS = 60,
 	CENTER = RADIUS,
 	C_VISIBLE = 10,
 	C_SIDE_LEN = (RADIUS * 2) / C_VISIBLE,
@@ -90,9 +90,9 @@ enum e_minimap {
 
 enum e_player {
 	SPEED = 15,
-	ROT_SPEED = 10,
+	ROT_SPEED = 15,
 	MOUSE_ROT_SPEED = 13,
-	FOV	= 75
+	FOV	= 66
 };
 
 /************************[ Structers ]************************/
