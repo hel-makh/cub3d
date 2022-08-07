@@ -6,7 +6,7 @@
 /*   By: hel-makh <hel-makh@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/29 17:24:09 by hel-makh          #+#    #+#             */
-/*   Updated: 2022/08/07 02:14:35 by hel-makh         ###   ########.fr       */
+/*   Updated: 2022/08/07 18:59:09 by hel-makh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ static void	ft_destroy_image(t_vars *vars, t_img *img)
 {
 	if (img->img)
 		mlx_destroy_image(vars->mlx.mlx, img->img);
-	// img->data = ft_free(img->data);	// segfault!
 }
 
 static void	ft_destroy_sprite(t_vars *vars, t_spr *spr)

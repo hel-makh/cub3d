@@ -6,7 +6,7 @@
 /*   By: hel-makh <hel-makh@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/05 11:43:14 by hel-makh          #+#    #+#             */
-/*   Updated: 2022/08/07 00:13:22 by hel-makh         ###   ########.fr       */
+/*   Updated: 2022/08/07 19:05:09 by hel-makh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,8 +73,8 @@ enum e_keycodes {
 # endif
 
 enum e_window {
-	WIDTH = 640,
-	HEIGHT = 480,
+	WIDTH = 850,
+	HEIGHT = 500,
 	FPS_X = 5,
 	FPS_Y = 15
 };
@@ -89,10 +89,10 @@ enum e_minimap {
 };
 
 enum e_player {
-	SPEED = 15,
-	ROT_SPEED = 15,
-	MOUSE_ROT_SPEED = 13,
-	FOV	= 66
+	SPEED = 4,
+	ROT_SPEED = 3,
+	MOUSE_ROT_SPEED = 2,
+	FOV	= 75
 };
 
 /************************[ Structers ]************************/
@@ -160,6 +160,7 @@ typedef struct s_mlx {
 	t_img	img;
 	t_img	minimap;
 	int		fps;
+	double	fspeed;
 }	t_mlx;
 
 typedef struct s_vars {

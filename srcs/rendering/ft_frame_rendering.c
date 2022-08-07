@@ -6,7 +6,7 @@
 /*   By: hel-makh <hel-makh@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/21 16:44:23 by hel-makh          #+#    #+#             */
-/*   Updated: 2022/08/04 23:49:19 by hel-makh         ###   ########.fr       */
+/*   Updated: 2022/08/07 19:06:10 by hel-makh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,18 +54,23 @@ int	ft_init_images(t_vars *vars)
 
 static void	ft_fps_counter(t_vars *vars)
 {
-	static long	next_check;
-	static int	fps;
+	static long	prev_timestamp;
+	static long	counter;
+	static int	frames;
 
-	if (!next_check)
-		next_check = ft_get_current_time() + 1000;
-	if (next_check <= ft_get_current_time())
+	if (!prev_timestamp)
+		prev_timestamp = ft_get_current_time();
+	vars->mlx.fspeed = (ft_get_current_time() - prev_timestamp) / 1000.0;
+	prev_timestamp = ft_get_current_time();
+	if (!counter)
+		counter = ft_get_current_time() + 1000;
+	if (counter <= ft_get_current_time())
 	{
-		next_check = ft_get_current_time() + 1000;
-		vars->mlx.fps = fps;
-		fps = 0;
+		counter = ft_get_current_time() + 1000;
+		vars->mlx.fps = frames;
+		frames = 0;
 	}
-	fps ++;
+	frames ++;
 }
 
 int	frame_rendering(t_vars *vars)
