@@ -6,7 +6,7 @@
 #    By: hel-makh <hel-makh@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/05 11:42:59 by hel-makh          #+#    #+#              #
-#    Updated: 2022/08/04 16:17:49 by hel-makh         ###   ########.fr        #
+#    Updated: 2022/08/10 13:28:41 by hel-makh         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -71,13 +71,15 @@ $(OBJS_DIR)%.o:$(SRCS_DIR)%.c		$(HEADER)
 					$(CC) $(CFLAGS) $(LIBFT_IFLAGS) $(MLX_IFLAGS) -c $< -o $@
 
 $(NAME):			$(HEADER) $(OBJS) $(LIBFT) $(MLX)
-					make -C $(MLX_DIR)
 					$(CC) $(CFLAGS) $(OBJS) $(LIBFT) $(MLX) $(MLX_LFLAGS) -o $(NAME)
 
 all:				$(NAME)
 
 $(LIBFT):
 					make -C $(LIBFT_DIR)
+
+$(MLX):
+					make -C $(MLX_DIR)
 
 clean:
 					rm -rf $(OBJS_DIR)
