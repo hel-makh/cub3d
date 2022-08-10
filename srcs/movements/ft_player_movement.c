@@ -6,7 +6,7 @@
 /*   By: hel-makh <hel-makh@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/21 22:27:23 by hel-makh          #+#    #+#             */
-/*   Updated: 2022/08/07 19:05:33 by hel-makh         ###   ########.fr       */
+/*   Updated: 2022/08/10 13:30:42 by hel-makh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	mouse_rotation(int x, int y, t_vars *vars)
 	(void)y;
 	diff = x - (WIDTH / 2);
 	vars->player.angle = ft_radian_operations(vars->player.angle,
-			diff * vars->mlx.fspeed * MOUSE_ROT_SPEED);
+			diff * vars->mlx.fspeed * (MOUSE_ROT_SPEED / 200.0));
 	# if defined(__linux__)
 		mlx_mouse_move(vars->mlx.mlx, vars->mlx.win, WIDTH / 2, HEIGHT / 2);
 	# elif defined(__APPLE__) && defined(__MACH__)
