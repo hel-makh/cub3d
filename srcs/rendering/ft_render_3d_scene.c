@@ -6,7 +6,7 @@
 /*   By: hel-makh <hel-makh@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/26 11:04:10 by hel-makh          #+#    #+#             */
-/*   Updated: 2022/08/06 13:22:44 by hel-makh         ###   ########.fr       */
+/*   Updated: 2022/08/07 22:37:10 by hel-makh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ static void	ft_draw_pixel(t_vars *vars, t_render *render, int *data, int ty)
 		&& (render->angle > M_PI_2 && render->angle < M_PI + M_PI_2))*/
 		img = &vars->map.west;
 	color = ft_get_texture_pixel(*img, render, ty);
-	if (color != -16777216)
+	if (color != ft_create_trgb(255, 0, 0, 0))
 		*data = color;
 }
 
