@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hel-makh <hel-makh@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: ybensell <ybensell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/05 11:43:14 by hel-makh          #+#    #+#             */
-/*   Updated: 2022/08/10 13:31:00 by hel-makh         ###   ########.fr       */
+/*   Updated: 2022/08/12 17:12:49 by ybensell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -150,8 +150,10 @@ typedef struct s_map {
 	t_img	south;
 	t_img	west;
 	t_img	east;
+	t_spr	sprite;
 	t_spr	door;
 	t_door	*doors;
+	t_coor	spr;
 }	t_map;
 
 typedef struct s_mlx {
