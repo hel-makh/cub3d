@@ -3,80 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_render_3d_scene.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ybensell <ybensell@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hel-makh <hel-makh@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/26 11:04:10 by hel-makh          #+#    #+#             */
-/*   Updated: 2022/08/13 12:50:34 by ybensell         ###   ########.fr       */
+/*   Updated: 2022/08/14 14:51:57 by hel-makh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
 #define RADIAN_INC	0.06
-
-static void	ft_draw_sprite(t_vars *vars, t_render *render)
-{
-	(void) render;
-	double dir;
-	t_coor d;
-	double sprite_dist;
-	double x,y;
-	double sx,sy;
-	double h,w;
-
-	d.x = vars->map.spr.x  - vars->player.pos.x;
-	d.y = vars->map.spr.y  - vars->player.pos.y;
-
-	dir = ft_radian_operations(atan2(d.y,d.x), -vars->player.angle);
-	sprite_dist = ft_get_distance(vars->map.spr,vars->player.pos);
-	
-
-	
-	h = HEIGHT/sprite_dist + HEIGHT/2 - vars->map.sprite.img->height;
-	w = ((dir * WIDTH/2)/FOV) + (WIDTH/2);
-
-	printf("player angle   :%lf\n ",vars->player.angle);
-	printf("dir            : %lf\n",dir);
-	printf("width          : %lf\n",w );
-	printf("sprite dist    : %lf\n",sprite_dist);
-	printf("height to draw :%lf\n", HEIGHT/sprite_dist + HEIGHT/2);
-
-	y = h;
-	// sy = 0;
-	// while (sy <  vars->map.sprite.img->height)
-	// {
-	// 	x = w;
-	// 	sx = 0;
-	// 	while (sx < vars->map.sprite.img->width )
-	// 	{
-	// 		vars->mlx.img.data[(int)y * WIDTH + (int)x] = vars->map.sprite.img->data[(int)sy * 
-	// 			vars->map.sprite.img->width + (int)sx];
-	// 		sx++;
-	// 		x++;
-	// 	};
-	// 	y++;
-	// 	sy++;
-	// };
-
-
-
-
-	// sprite_screen_size = 200;
-
-	// h_off = ((sprite_dir - vars->player.angle)*(WIDTH/2))/((FOV)) + 
-	// 		((WIDTH/2)/2) - sprite_screen_size/2;
-	// v_off = HEIGHT/2 - sprite_screen_size/2;
-
-	// for (size_t i=0; i<sprite_screen_size; i++) {
-	// 	if (h_off+(int)i<0 || h_off+i>=WIDTH/2) continue;
-	// 	for (size_t j=0; j<sprite_screen_size; j++) {
-	// 		if (v_off+(int)j<0 || v_off+j>=HEIGHT) continue;
-	// 		vars->mlx.img.data[(int)((v_off+j) * WIDTH + (WIDTH/2 + h_off+i))] 
-	// 			= vars->map.sprite.img->data[(int)((v_off+j) * WIDTH + (WIDTH/2 + h_off+i))] ;
-	// 	}
-	// }
-	
-}
 
 static int
 	ft_get_texture_pixel(t_img img, t_render *render, int ty)
@@ -113,8 +49,7 @@ static void	ft_draw_pixel(t_vars *vars, t_render *render, int *data, int ty)
 	else if (render->direc == 'v'
 		&& (render->angle < M_PI_2 || render->angle > M_PI + M_PI_2))
 		img = &vars->map.east;
-	else /*if (render->direc == 'v'
-		&& (render->angle > M_PI_2 && render->angle < M_PI + M_PI_2))*/
+	else
 		img = &vars->map.west;
 	color = ft_get_texture_pixel(*img, render, ty);
 	if (color != ft_create_trgb(255, 0, 0, 0))
@@ -139,7 +74,7 @@ static void	ft_draw_walls(t_vars *vars, t_render *render)
 				+ render->wall_dim.width && x < WIDTH)
 			{
 				ft_draw_pixel(vars, render,
-					&vars->mlx.img.data[y * WIDTH + x], ty);
+					&vars->mlx.img.data[y * WIDTH + x], ty - 1);
 				x ++;
 			}
 			ty ++;
@@ -193,5 +128,4 @@ void	ft_render_3d_scene(t_vars *vars)
 		ft_render_lstclear(&render);
 		degree += RADIAN_INC;
 	}
-	ft_draw_sprite(vars,render);
 }

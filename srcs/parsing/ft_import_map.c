@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_import_map.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ybensell <ybensell@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hel-makh <hel-makh@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/05 14:03:39 by hel-makh          #+#    #+#             */
-/*   Updated: 2022/08/12 17:08:40 by ybensell         ###   ########.fr       */
+/*   Updated: 2022/08/14 21:40:30 by hel-makh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,11 @@ static void	ft_init_map_vars(t_map *map)
 	map->south.img = NULL;
 	map->west.img = NULL;
 	map->east.img = NULL;
-	map->sprite.img = NULL;
+	map->collectible.img = NULL;
+	map->collectible.frames = 0;
 	map->door.img = NULL;
 	map->door.frames = 0;
+	map->collectibles = NULL;
 	map->doors = NULL;
 }
 

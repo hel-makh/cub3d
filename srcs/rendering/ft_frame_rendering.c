@@ -6,7 +6,7 @@
 /*   By: hel-makh <hel-makh@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/21 16:44:23 by hel-makh          #+#    #+#             */
-/*   Updated: 2022/08/07 20:58:47 by hel-makh         ###   ########.fr       */
+/*   Updated: 2022/08/14 21:36:35 by hel-makh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ int	frame_rendering(t_vars *vars)
 	ft_move_player(vars);
 	ft_door_animation(vars);
 	ft_render_3d_scene(vars);
+	ft_render_sprites(vars);
 	ft_render_minimap(vars);
 	mlx_put_image_to_window(vars->mlx.mlx, vars->mlx.win,
 		vars->mlx.img.img, 0, 0);

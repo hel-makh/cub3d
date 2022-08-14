@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_get_textures.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ybensell <ybensell@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hel-makh <hel-makh@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/11 12:00:44 by hel-makh          #+#    #+#             */
-/*   Updated: 2022/08/12 17:09:31 by ybensell         ###   ########.fr       */
+/*   Updated: 2022/08/14 20:57:56 by hel-makh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,8 +74,8 @@ int	ft_get_textures(t_vars *vars, char **info)
 		return (ft_open_image(vars, &vars->map.west, info[1]));
 	else if (!ft_strcmp(info[0], "EA"))
 		return (ft_open_image(vars, &vars->map.east, info[1]));
-	else if (!ft_strcmp(info[0], "SP"))
-		return (ft_get_sprite(vars, &vars->map.sprite, &info[1]));
+	else if (!ft_strcmp(info[0], "CO"))
+		return (ft_get_sprite(vars, &vars->map.collectible, &info[1]));
 	else if (!ft_strcmp(info[0], "DO"))
 		return (ft_get_sprite(vars, &vars->map.door, &info[1]));
 	else if (!ft_strcmp(info[0], "F"))

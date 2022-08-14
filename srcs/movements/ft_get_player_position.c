@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_get_player_position.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ybensell <ybensell@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hel-makh <hel-makh@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/21 10:41:39 by hel-makh          #+#    #+#             */
-/*   Updated: 2022/08/12 17:13:42 by ybensell         ###   ########.fr       */
+/*   Updated: 2022/08/14 21:07:37 by hel-makh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,10 +47,8 @@ void	ft_get_player_position(t_vars *vars)
 				ft_get_player_angle(vars);
 			}
 			else if (vars->map.map[i][j] == 'C')
-			{
-				vars->map.spr.x = (double)j + 0.5;
-				vars->map.spr.y = (double)i + 0.5;
-			}
+				ft_collectible_lstadd_front(&vars->map.collectibles,
+					ft_collectible_lstnew(j, i));
 			j ++;
 		}
 		i ++;

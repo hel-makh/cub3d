@@ -6,7 +6,7 @@
 /*   By: hel-makh <hel-makh@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/29 17:24:09 by hel-makh          #+#    #+#             */
-/*   Updated: 2022/08/07 21:01:36 by hel-makh         ###   ########.fr       */
+/*   Updated: 2022/08/14 21:40:19 by hel-makh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,8 @@ int	ft_exit_game(t_vars *vars, int exit_status)
 	ft_destroy_image(vars, &vars->map.south);
 	ft_destroy_image(vars, &vars->map.west);
 	ft_destroy_image(vars, &vars->map.east);
+	ft_destroy_sprite(vars, &vars->map.collectible);
+	ft_collectible_lstclear(&vars->map.collectibles);
 	ft_destroy_sprite(vars, &vars->map.door);
 	ft_door_lstclear(&vars->map.doors);
 	vars->map.map = ft_free_2d(vars->map.map);
