@@ -6,7 +6,7 @@
 /*   By: hel-makh <hel-makh@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/26 11:04:10 by hel-makh          #+#    #+#             */
-/*   Updated: 2022/08/15 21:34:09 by hel-makh         ###   ########.fr       */
+/*   Updated: 2022/08/15 22:16:56 by hel-makh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ static int
 	if (render->wall_orig_height > HEIGHT)
 		ty_off = (render->wall_orig_height - HEIGHT) / 2;
 	ty = (ty_off * ty_step) + ((render->ty - 1) * ty_step);
-	return (img.data[ty * img.width + tx]);
+	return (img.data[abs(ty) * img.width + abs(tx)]);
 }
 
 static void
