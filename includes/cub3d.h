@@ -6,7 +6,7 @@
 /*   By: hel-makh <hel-makh@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/05 11:43:14 by hel-makh          #+#    #+#             */
-/*   Updated: 2022/08/15 11:15:58 by hel-makh         ###   ########.fr       */
+/*   Updated: 2022/08/15 21:55:41 by hel-makh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,12 @@
 
 # define USAGE			"Usage: ./cub3d <file.cub>"
 
+/**********************[ Sound Effects ]**********************/
 # define DOOR_OPEN		"sound/door_open.wav"
 # define DOOR_CLOSE		"sound/door_close.wav"
 # define COIN_COLLECT	"sound/coin_collect.wav"
 
-/***********************[ Components ]***********************/
+/************************[ Components ]***********************/
 # define SPACE			' '
 # define EMPTY_SPACE	'0'
 # define WALL			'1'
@@ -44,7 +45,7 @@
 # define WALLS			"12"
 # define DOORS			"23"
 
-/***********************[ Enumeration ]***********************/
+/**********************[ Configuration ]**********************/
 # if defined(__linux__)
 
 enum e_keycodes {
@@ -167,6 +168,7 @@ typedef struct s_map {
 	t_spr	door;
 	t_door	*doors;
 	t_coor	spr;
+	double	depth[WIDTH];
 }	t_map;
 
 typedef struct s_mlx {
@@ -191,8 +193,16 @@ typedef struct s_render {
 	double			dist;
 	t_dim			wall_dim;
 	double			wall_orig_height;
+	int				ty;
 	struct s_render	*next;
 }	t_render;
+
+typedef struct s_rend_spr {
+	t_coor	sc;
+	t_coor	col;
+	t_coor	tex;
+	t_dim	spr;
+}	t_rend_spr;
 
 /**************************[ Utils ]**************************/
 long		ft_get_current_time(void);
@@ -234,12 +244,10 @@ int			key_release(int keycode, t_vars *vars);
 int			mouse_rotation(int x, int y, t_vars *vars);
 void		ft_move_player(t_vars *vars);
 
-/************************[ RayCasting ]***********************/
-t_coor		ft_get_hit_wall(t_vars *vars, t_coor start_pos,
-				double angle, int *direction);
-
 /************************[ Rendering ]************************/
 int			ft_init_images(t_vars *vars);
+t_coor		ft_get_hit_wall(t_vars *vars, t_coor start_pos,
+				double angle, int *direction);
 int			frame_rendering(t_vars *vars);
 void		ft_render_minimap(t_vars *vars);
 void		ft_draw_rays(t_vars *vars, t_circle minimap);

@@ -6,7 +6,7 @@
 /*   By: hel-makh <hel-makh@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/21 16:44:23 by hel-makh          #+#    #+#             */
-/*   Updated: 2022/08/14 21:36:35 by hel-makh         ###   ########.fr       */
+/*   Updated: 2022/08/15 21:53:42 by hel-makh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ int	frame_rendering(t_vars *vars)
 	ft_render_3d_scene(vars);
 	ft_render_sprites(vars);
 	ft_render_minimap(vars);
+	mlx_clear_window(vars->mlx.mlx, vars->mlx.win);
 	mlx_put_image_to_window(vars->mlx.mlx, vars->mlx.win,
 		vars->mlx.img.img, 0, 0);
 	mlx_string_put(vars->mlx.mlx, vars->mlx.win, FPS_X, FPS_Y,

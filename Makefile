@@ -6,7 +6,7 @@
 #    By: hel-makh <hel-makh@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/05 11:42:59 by hel-makh          #+#    #+#              #
-#    Updated: 2022/08/15 09:44:40 by hel-makh         ###   ########.fr        #
+#    Updated: 2022/08/15 22:00:25 by hel-makh         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,7 +31,7 @@ FILES			=	utils/ft_get_current_time.c\
 					parsing/ft_component_surroundings.c\
 					movements/ft_get_player_position.c\
 					movements/ft_player_movement.c\
-					raycasting/ft_get_hit_wall.c\
+					rendering/ft_get_hit_wall.c\
 					rendering/ft_frame_rendering.c\
 					rendering/ft_door_opening.c\
 					rendering/ft_render_minimap.c\
