@@ -6,7 +6,7 @@
 /*   By: hel-makh <hel-makh@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/05 11:43:14 by hel-makh          #+#    #+#             */
-/*   Updated: 2022/08/14 21:38:01 by hel-makh         ###   ########.fr       */
+/*   Updated: 2022/08/15 11:15:58 by hel-makh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,11 @@
 # include <libft.h>
 # include <mlx.h>
 
-# define USAGE	"Usage: ./cub3d <file.cub>"
+# define USAGE			"Usage: ./cub3d <file.cub>"
+
+# define DOOR_OPEN		"sound/door_open.wav"
+# define DOOR_CLOSE		"sound/door_close.wav"
+# define COIN_COLLECT	"sound/coin_collect.wav"
 
 /***********************[ Components ]***********************/
 # define SPACE			' '
@@ -35,6 +39,7 @@
 # define P_SOUTH		'S'
 # define P_EAST			'E'
 # define P_WEST			'W'
+# define COLLECTIBLE	'C'
 # define HIT_WALLS		"123"
 # define WALLS			"12"
 # define DOORS			"23"
@@ -197,6 +202,7 @@ int			ft_is_in_circle(double x, double y, t_circle circle);
 double		ft_rtod(double radian);
 double		ft_dtor(double degree);
 double		ft_radian_operations(double radian, double amout);
+void		ft_play_sound(char *path);
 
 t_col		*ft_collectible_lstnew(int x, int y);
 void		ft_collectible_lstadd_front(t_col **lst, t_col *new);

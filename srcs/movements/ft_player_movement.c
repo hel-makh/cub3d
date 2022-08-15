@@ -6,7 +6,7 @@
 /*   By: hel-makh <hel-makh@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/21 22:27:23 by hel-makh          #+#    #+#             */
-/*   Updated: 2022/08/14 21:09:08 by hel-makh         ###   ########.fr       */
+/*   Updated: 2022/08/15 11:15:48 by hel-makh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,9 +63,15 @@ void	ft_move_player(t_vars *vars)
 		+ (vars->player.dir.y * vars->mlx.fspeed * SPEED);
 	if (!ft_strchr(WALLS, vars->map.map[(int)new_pos.y][(int)vars->player.pos.x]))
 		vars->player.pos.y = new_pos.y;
-	if (vars->map.map[(int)vars->player.pos.y][(int)vars->player.pos.x] == 'C')
+	if (vars->map.map[(int)vars->player.pos.y][(int)vars->player.pos.x]
+		== COLLECTIBLE)
+	{
+		vars->map.map[(int)vars->player.pos.y][(int)vars->player.pos.x]
+			= EMPTY_SPACE;
+		ft_play_sound(COIN_COLLECT);
 		ft_collectible_lstdel(&vars->map.collectibles,
 			vars->player.pos.x, vars->player.pos.y);
+	}
 }
 
 int	key_press(int keycode, t_vars *vars)

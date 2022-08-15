@@ -6,7 +6,7 @@
 #    By: hel-makh <hel-makh@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/05 11:42:59 by hel-makh          #+#    #+#              #
-#    Updated: 2022/08/14 21:28:24 by hel-makh         ###   ########.fr        #
+#    Updated: 2022/08/15 09:44:40 by hel-makh         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,6 +20,7 @@ FILES			=	utils/ft_get_current_time.c\
 					utils/ft_is_in_circle.c\
 					utils/ft_radian_degree.c\
 					utils/ft_radian_operations.c\
+					utils/ft_play_sound.c\
 					utils/ft_collectible_lstfuncs.c\
 					utils/ft_door_lstfuncs.c\
 					utils/ft_render_lstfuncs.c\

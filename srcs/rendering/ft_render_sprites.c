@@ -6,7 +6,7 @@
 /*   By: hel-makh <hel-makh@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/13 14:13:42 by hel-makh          #+#    #+#             */
-/*   Updated: 2022/08/14 21:41:11 by hel-makh         ###   ########.fr       */
+/*   Updated: 2022/08/15 12:59:16 by hel-makh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,9 +40,9 @@ void	ft_render_sprites(t_vars *vars)
 		ft_collectibles_animation(vars, holder);
 		col.x = (double)holder->x + 0.5;
 		col.y = (double)holder->y + 0.5;
-		sc.x = col.x - vars->player.pos.x;
-		sc.y = col.y - vars->player.pos.y;
-		angle = ft_rtod(atan2(-sc.y, -sc.x));
+		sc.x = vars->player.pos.x - col.x;
+		sc.y = vars->player.pos.y - col.y;
+		angle = ft_rtod(atan2(sc.y, sc.x));
 		if(angle < 0)
 			angle += 360;
 		ray_angle = ft_rtod(vars->player.angle) + (FOV / 2) - angle;
