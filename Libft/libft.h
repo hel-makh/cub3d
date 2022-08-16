@@ -6,7 +6,7 @@
 /*   By: hel-makh <hel-makh@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/06 18:28:42 by hel-makh          #+#    #+#             */
-/*   Updated: 2022/08/16 14:30:06 by hel-makh         ###   ########.fr       */
+/*   Updated: 2022/08/16 14:58:20 by hel-makh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 # include <stdlib.h>
 
-#define BUFFER_SIZE 42
+# define BUFFER_SIZE 42
 
 typedef struct s_list
 {

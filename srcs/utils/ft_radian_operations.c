@@ -6,7 +6,7 @@
 /*   By: hel-makh <hel-makh@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/24 13:05:36 by hel-makh          #+#    #+#             */
-/*   Updated: 2022/06/24 16:16:02 by hel-makh         ###   ########.fr       */
+/*   Updated: 2022/08/16 23:33:20 by hel-makh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 double	ft_radian_operations(double radian, double amout)
 {
 	radian += amout;
-	while (radian >= 2 * M_PI)
+	while (radian > 2 * M_PI)
 		radian -= 2 * M_PI;
 	while (radian < 0)
 		radian += 2 * M_PI;

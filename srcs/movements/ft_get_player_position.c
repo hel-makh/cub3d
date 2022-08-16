@@ -6,7 +6,7 @@
 /*   By: hel-makh <hel-makh@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/21 10:41:39 by hel-makh          #+#    #+#             */
-/*   Updated: 2022/08/16 11:41:39 by hel-makh         ###   ########.fr       */
+/*   Updated: 2022/08/16 23:33:59 by hel-makh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,9 @@ static void	ft_get_player_angle(t_vars *vars)
 	else if (vars->map.map[y][x] == 'S')
 		vars->player.angle = M_PI + M_PI_2;
 	else if (vars->map.map[y][x] == 'E')
-		vars->player.angle = 0;
-	else if (vars->map.map[y][x] == 'W')
 		vars->player.angle = M_PI;
+	else if (vars->map.map[y][x] == 'W')
+		vars->player.angle = 0;
 }
 
 void	ft_get_player_position(t_vars *vars)
