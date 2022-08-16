@@ -6,7 +6,7 @@
 /*   By: hel-makh <hel-makh@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/05 19:04:43 by hel-makh          #+#    #+#             */
-/*   Updated: 2022/08/14 21:25:49 by hel-makh         ###   ########.fr       */
+/*   Updated: 2022/08/16 11:31:17 by hel-makh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ int	ft_parse_textures(t_vars *vars, int fd)
 			if (!ft_is_valid_format(info)
 				|| ft_is_duplicated(&vars->map, info)
 				|| !ft_get_textures(vars, info))
-				return (0);
+				return (ft_free_2d(info), 0);
 			info = ft_free_2d(info);
 		}
 		line = ft_free(line);
