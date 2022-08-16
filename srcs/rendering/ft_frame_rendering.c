@@ -6,7 +6,7 @@
 /*   By: hel-makh <hel-makh@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/21 16:44:23 by hel-makh          #+#    #+#             */
-/*   Updated: 2022/08/16 14:44:52 by hel-makh         ###   ########.fr       */
+/*   Updated: 2022/08/16 14:58:36 by hel-makh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ static void	ft_fps_counter(t_vars *vars)
 
 int	frame_rendering(t_vars *vars)
 {
-	char*	fps;
+	char	*fps;
 
 	ft_fps_counter(vars);
 	ft_move_player(vars);
