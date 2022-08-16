@@ -6,17 +6,11 @@
 /*   By: hel-makh <hel-makh@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/07 13:48:05 by hel-makh          #+#    #+#             */
-/*   Updated: 2022/07/20 13:02:19 by hel-makh         ###   ########.fr       */
+/*   Updated: 2022/08/16 14:31:24 by hel-makh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
-
-typedef struct s_content {
-	int	space;
-	int	wall;
-	int	player;
-}	t_content;
 
 static int	ft_read_map(t_map *map, int fd)
 {
@@ -49,7 +43,7 @@ static int	ft_read_map(t_map *map, int fd)
 
 static int	ft_check_component(t_map *map, int i, int j, t_content *content)
 {
-	if (!ft_strchr(" 0123NSEW", map->map[i][j]))
+	if (!ft_strchr(" 0123NSEWC", map->map[i][j]))
 	{
 		printf("Error\nInvalid map: Invalid component [%c]."
 			"\nLine: %d, Column: %d\n", map->map[i][j], i + 1, j + 1);
@@ -103,7 +97,7 @@ static int	ft_is_map_closed(t_map *map)
 		j = 0;
 		while (map->map[i][j])
 		{
-			if (ft_strchr(" 023NSEW", map->map[i][j]))
+			if (ft_strchr(" 023NSEWC", map->map[i][j]))
 			{
 				if (!ft_component_surroundings(map->map, i, j))
 					return (0);

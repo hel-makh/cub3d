@@ -6,7 +6,7 @@
 /*   By: hel-makh <hel-makh@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/11 12:00:44 by hel-makh          #+#    #+#             */
-/*   Updated: 2022/08/07 01:12:20 by hel-makh         ###   ########.fr       */
+/*   Updated: 2022/08/16 11:31:26 by hel-makh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,13 @@ static int	ft_get_rgb_colors(int *color, char **info)
 
 	arr = ft_split(info[1], ',');
 	if (ft_arrlen(arr) != 3)
-		return (printf("Error\nInvalid RGB format.\n"), ft_free(arr), 0);
+		return (printf("Error\nInvalid RGB format.\n"), ft_free_2d(arr), 0);
 	if (!ft_isnumber(arr[0]) || !ft_isnumber(arr[1]) || !ft_isnumber(arr[2]))
-		return (printf("Error\nInvalid RGB values.\n"), ft_free(arr), 0);
+		return (printf("Error\nInvalid RGB values.\n"), ft_free_2d(arr), 0);
 	rgb[0] = ft_atoi(arr[0]);
 	rgb[1] = ft_atoi(arr[1]);
 	rgb[2] = ft_atoi(arr[2]);
-	arr = ft_free(arr);
+	arr = ft_free_2d(arr);
 	if (rgb[0] < 0 || rgb[0] > 255
 		|| rgb[1] < 0 || rgb[1] > 255
 		|| rgb[2] < 0 || rgb[2] > 255)
@@ -74,6 +74,8 @@ int	ft_get_textures(t_vars *vars, char **info)
 		return (ft_open_image(vars, &vars->map.west, info[1]));
 	else if (!ft_strcmp(info[0], "EA"))
 		return (ft_open_image(vars, &vars->map.east, info[1]));
+	else if (!ft_strcmp(info[0], "CO"))
+		return (ft_get_sprite(vars, &vars->map.collectible, &info[1]));
 	else if (!ft_strcmp(info[0], "DO"))
 		return (ft_get_sprite(vars, &vars->map.door, &info[1]));
 	else if (!ft_strcmp(info[0], "F"))

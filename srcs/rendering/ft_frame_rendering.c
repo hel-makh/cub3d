@@ -6,7 +6,7 @@
 /*   By: hel-makh <hel-makh@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/21 16:44:23 by hel-makh          #+#    #+#             */
-/*   Updated: 2022/08/07 20:58:47 by hel-makh         ###   ########.fr       */
+/*   Updated: 2022/08/16 14:44:52 by hel-makh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,14 +46,20 @@ static void	ft_fps_counter(t_vars *vars)
 
 int	frame_rendering(t_vars *vars)
 {
+	char*	fps;
+
 	ft_fps_counter(vars);
 	ft_move_player(vars);
 	ft_door_animation(vars);
 	ft_render_3d_scene(vars);
+	ft_render_sprites(vars);
 	ft_render_minimap(vars);
+	mlx_clear_window(vars->mlx.mlx, vars->mlx.win);
 	mlx_put_image_to_window(vars->mlx.mlx, vars->mlx.win,
 		vars->mlx.img.img, 0, 0);
+	fps = ft_itoa(vars->mlx.fps);
 	mlx_string_put(vars->mlx.mlx, vars->mlx.win, FPS_X, FPS_Y,
-		ft_create_trgb(0, 0, 255, 0), ft_itoa(vars->mlx.fps));
+		ft_create_trgb(0, 0, 255, 0), fps);
+	fps = ft_free(fps);
 	return (1);
 }

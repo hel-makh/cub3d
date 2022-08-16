@@ -6,18 +6,19 @@
 /*   By: hel-makh <hel-makh@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/26 11:04:10 by hel-makh          #+#    #+#             */
-/*   Updated: 2022/08/07 22:37:10 by hel-makh         ###   ########.fr       */
+/*   Updated: 2022/08/15 22:16:56 by hel-makh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-#define RADIAN_INC	0.06
+#define DEG_INC	0.06
 
 static int
-	ft_get_texture_pixel(t_img img, t_render *render, int ty)
+	ft_get_texture_pixel(t_img img, t_render *render)
 {
 	int		tx;
+	int		ty;
 	double	ty_step;
 	double	ty_off;
 
@@ -29,11 +30,12 @@ static int
 	ty_off = 0;
 	if (render->wall_orig_height > HEIGHT)
 		ty_off = (render->wall_orig_height - HEIGHT) / 2;
-	ty = ty_off * ty_step + (ty * ty_step);
-	return (img.data[ty * img.width + tx]);
+	ty = (ty_off * ty_step) + ((render->ty - 1) * ty_step);
+	return (img.data[abs(ty) * img.width + abs(tx)]);
 }
 
-static void	ft_draw_pixel(t_vars *vars, t_render *render, int *data, int ty)
+static void
+	ft_draw_pixel(t_vars *vars, t_render *render, int x, int y)
 {
 	t_img	*img;
 	int		color;
@@ -49,36 +51,36 @@ static void	ft_draw_pixel(t_vars *vars, t_render *render, int *data, int ty)
 	else if (render->direc == 'v'
 		&& (render->angle < M_PI_2 || render->angle > M_PI + M_PI_2))
 		img = &vars->map.east;
-	else /*if (render->direc == 'v'
-		&& (render->angle > M_PI_2 && render->angle < M_PI + M_PI_2))*/
+	else
 		img = &vars->map.west;
-	color = ft_get_texture_pixel(*img, render, ty);
+	color = ft_get_texture_pixel(*img, render);
 	if (color != ft_create_trgb(255, 0, 0, 0))
-		*data = color;
+		vars->mlx.img.data[y * WIDTH + x] = color;
+	if (ft_strchr(WALLS, vars->map.map[(int)render->hit_wall.y]
+			[(int)render->hit_wall.x]))
+		vars->map.depth[x] = render->dist;
 }
 
 static void	ft_draw_walls(t_vars *vars, t_render *render)
 {
 	int	x;
 	int	y;
-	int	ty;
 
 	while (render)
 	{
-		ty = 0;
+		render->ty = 0;
 		y = (HEIGHT / 2) - (render->wall_dim.height / 2);
 		while (y < (HEIGHT / 2) - (render->wall_dim.height / 2)
 			+ render->wall_dim.height && y < HEIGHT)
 		{
-			x = (render->degree / RADIAN_INC) * render->wall_dim.width;
-			while (x < ((render->degree / RADIAN_INC) * render->wall_dim.width)
+			x = (render->degree / DEG_INC) * render->wall_dim.width;
+			while (x < ((render->degree / DEG_INC) * render->wall_dim.width)
 				+ render->wall_dim.width && x < WIDTH)
 			{
-				ft_draw_pixel(vars, render,
-					&vars->mlx.img.data[y * WIDTH + x], ty);
+				ft_draw_pixel(vars, render, x, y);
 				x ++;
 			}
-			ty ++;
+			(render->ty)++;
 			y ++;
 		}
 		render = render->next;
@@ -93,7 +95,7 @@ static void	ft_get_wall_dims(t_vars *vars, t_render *render,
 			render->angle, &render->direc);
 	render->dist = ft_get_distance(vars->player.pos, render->hit_wall)
 		* cos(ft_radian_operations(vars->player.angle, -render->angle));
-	render->wall_dim.width = WIDTH / (FOV / RADIAN_INC);
+	render->wall_dim.width = WIDTH / (FOV / DEG_INC);
 	render->wall_dim.height = HEIGHT;
 	if (render->dist > 0)
 		render->wall_dim.height = HEIGHT / render->dist;
@@ -127,6 +129,6 @@ void	ft_render_3d_scene(t_vars *vars)
 		}
 		ft_draw_walls(vars, render);
 		ft_render_lstclear(&render);
-		degree += RADIAN_INC;
+		degree += DEG_INC;
 	}
 }

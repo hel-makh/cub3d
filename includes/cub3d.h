@@ -6,7 +6,7 @@
 /*   By: hel-makh <hel-makh@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/05 11:43:14 by hel-makh          #+#    #+#             */
-/*   Updated: 2022/08/10 13:31:00 by hel-makh         ###   ########.fr       */
+/*   Updated: 2022/08/16 14:31:43 by hel-makh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,14 @@
 # include <libft.h>
 # include <mlx.h>
 
-# define USAGE	"Usage: ./cub3d <file.cub>"
+# define USAGE			"Usage: ./cub3d <file.cub>"
 
-/***********************[ Components ]***********************/
+/**********************[ Sound Effects ]**********************/
+# define DOOR_OPEN		"sound/door_open.wav"
+# define DOOR_CLOSE		"sound/door_close.wav"
+# define COIN_COLLECT	"sound/coin_collect.wav"
+
+/************************[ Components ]***********************/
 # define SPACE			' '
 # define EMPTY_SPACE	'0'
 # define WALL			'1'
@@ -35,11 +40,12 @@
 # define P_SOUTH		'S'
 # define P_EAST			'E'
 # define P_WEST			'W'
+# define COLLECTIBLE	'C'
 # define HIT_WALLS		"123"
 # define WALLS			"12"
 # define DOORS			"23"
 
-/***********************[ Enumeration ]***********************/
+/**********************[ Configuration ]**********************/
 # if defined(__linux__)
 
 enum e_keycodes {
@@ -112,12 +118,44 @@ typedef struct s_coor {
 	double	y;
 }	t_coor;
 
+typedef struct s_col {
+	int				x;
+	int				y;
+	double			frame;
+	struct s_col	*next;
+}	t_col;
+
 typedef struct s_door {
 	int				x;
 	int				y;
 	double			frame;
 	struct s_door	*next;
 }	t_door;
+
+typedef struct s_content {
+	int	space;
+	int	wall;
+	int	player;
+}	t_content;
+
+typedef struct s_render {
+	double			degree;
+	double			angle;
+	t_coor			hit_wall;
+	int				direc;
+	double			dist;
+	t_dim			wall_dim;
+	double			wall_orig_height;
+	int				ty;
+	struct s_render	*next;
+}	t_render;
+
+typedef struct s_rend_spr {
+	t_coor	sc;
+	t_coor	col;
+	t_coor	tex;
+	t_dim	spr;
+}	t_rend_spr;
 
 typedef struct s_player {
 	t_coor	pos;
@@ -150,8 +188,12 @@ typedef struct s_map {
 	t_img	south;
 	t_img	west;
 	t_img	east;
+	t_spr	collectible;
+	t_col	*collectibles;
 	t_spr	door;
 	t_door	*doors;
+	t_coor	spr;
+	double	depth[WIDTH];
 }	t_map;
 
 typedef struct s_mlx {
@@ -168,65 +210,60 @@ typedef struct s_vars {
 	t_player	player;
 }	t_vars;
 
-typedef struct s_render {
-	double			degree;
-	double			angle;
-	t_coor			hit_wall;
-	int				direc;
-	double			dist;
-	t_dim			wall_dim;
-	double			wall_orig_height;
-	struct s_render	*next;
-}	t_render;
-
 /**************************[ Utils ]**************************/
-long	ft_get_current_time(void);
-int		ft_create_trgb(int t, int r, int g, int b);
-double	ft_get_distance(t_coor poin1, t_coor point2);
-int		ft_is_in_circle(double x, double y, t_circle circle);
-double	ft_rtod(double radian);
-double	ft_dtor(double degree);
-double	ft_radian_operations(double radian, double amout);
+long		ft_get_current_time(void);
+int			ft_create_trgb(int t, int r, int g, int b);
+double		ft_get_distance(t_coor poin1, t_coor point2);
+int			ft_is_in_circle(double x, double y, t_circle circle);
+double		ft_rtod(double radian);
+double		ft_dtor(double degree);
+double		ft_radian_operations(double radian, double amout);
+void		ft_play_sound(char *path);
 
-t_door	*ft_door_lstnew(int x, int y);
-void	ft_door_lstadd_front(t_door **lst, t_door *new);
-void	ft_door_lstdel(t_door **lst, int x, int y);
-void	ft_door_lstclear(t_door **lst);
-int		ft_door_frame(t_door *lst, int x, int y);
+t_col		*ft_collectible_lstnew(int x, int y);
+void		ft_collectible_lstadd_front(t_col **lst, t_col *new);
+void		ft_collectible_lstdel(t_col **lst, int x, int y);
+void		ft_collectible_lstclear(t_col **lst);
+int			ft_collectible_frame(t_col *lst, int x, int y);
+
+t_door		*ft_door_lstnew(int x, int y, int frame);
+void		ft_door_lstadd_front(t_door **lst, t_door *new);
+void		ft_door_lstdel(t_door **lst, int x, int y);
+void		ft_door_lstclear(t_door **lst);
+int			ft_door_frame(t_door *lst, int x, int y);
 
 t_render	*ft_render_lstnew(void);
 void		ft_render_lstadd_front(t_render **lst, t_render *new);
 void		ft_render_lstclear(t_render **lst);
 
 /*************************[ Parsing ]*************************/
-int		ft_import_map(t_vars *vars, char *file);
-int		ft_parse_textures(t_vars *vars, int fd);
-int		ft_get_textures(t_vars *vars, char **info);
-int		ft_parse_map(t_map *map, int fd);
-int		ft_component_surroundings(char **map, int i, int j);
+int			ft_import_map(t_vars *vars, char *file);
+int			ft_parse_textures(t_vars *vars, int fd);
+int			ft_get_textures(t_vars *vars, char **info);
+int			ft_parse_map(t_map *map, int fd);
+int			ft_component_surroundings(char **map, int i, int j);
 
 /************************[ Movements ]************************/
-void	ft_get_player_position(t_vars *vars);
-int		key_press(int keycode, t_vars *vars);
-int		key_release(int keycode, t_vars *vars);
-int		mouse_rotation(int x, int y, t_vars *vars);
-void	ft_move_player(t_vars *vars);
-
-/************************[ RayCasting ]***********************/
-t_coor	ft_get_hit_wall(t_vars *vars, t_coor start_pos,
-			double angle, int *direction);
+void		ft_get_player_position(t_vars *vars);
+int			key_press(int keycode, t_vars *vars);
+int			key_release(int keycode, t_vars *vars);
+int			mouse_rotation(int x, int y, t_vars *vars);
+void		ft_move_player(t_vars *vars);
 
 /************************[ Rendering ]************************/
-int		ft_init_images(t_vars *vars);
-int		frame_rendering(t_vars *vars);
-void	ft_render_minimap(t_vars *vars);
-void	ft_draw_rays(t_vars *vars, t_circle minimap);
-void	ft_render_3d_scene(t_vars *vars);
-void	ft_draw_floor_ceilling(t_vars *vars);
-void	ft_door_animation(t_vars *vars);
-void	ft_open_close_door(t_vars *vars);
+int			ft_init_images(t_vars *vars);
+t_coor		ft_get_hit_wall(t_vars *vars, t_coor start_pos,
+				double angle, int *direction);
+int			frame_rendering(t_vars *vars);
+void		ft_render_minimap(t_vars *vars);
+void		ft_draw_rays(t_vars *vars, t_circle minimap);
+void		ft_render_3d_scene(t_vars *vars);
+void		ft_render_sprites(t_vars *vars);
+void		ft_draw_floor_ceilling(t_vars *vars);
+void		ft_door_animation(t_vars *vars);
+void		ft_open_close_door(t_vars *vars);
 
 /**************************[ Other ]**************************/
-int		ft_exit_game(t_vars *vars, int exit_status);
+int			ft_exit_game(t_vars *vars, int exit_status);
 
 #endif

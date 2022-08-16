@@ -6,17 +6,11 @@
 /*   By: hel-makh <hel-makh@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 15:27:45 by hel-makh          #+#    #+#             */
-/*   Updated: 2022/03/24 15:06:34 by hel-makh         ###   ########.fr       */
+/*   Updated: 2022/08/16 14:30:03 by hel-makh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-
-typedef struct s_index {
-	size_t	i;
-	size_t	j;
-	size_t	k;
-}	t_index;
 
 char	**ft_replace_arr(
 	char **arr1, char **arr2, unsigned int start, unsigned int size

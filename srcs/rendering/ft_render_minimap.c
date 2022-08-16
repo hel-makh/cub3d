@@ -6,7 +6,7 @@
 /*   By: hel-makh <hel-makh@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 19:53:41 by hel-makh          #+#    #+#             */
-/*   Updated: 2022/08/11 09:26:08 by hel-makh         ###   ########.fr       */
+/*   Updated: 2022/08/15 11:25:53 by hel-makh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,9 +68,10 @@ static void	ft_draw_map_components(t_vars *vars, t_circle minimap)
 				- (vars->player.pos.y * C_SIDE_LEN) + CENTER;
 			coor.x = (j * C_SIDE_LEN)
 				- (vars->player.pos.x * C_SIDE_LEN) + CENTER;
-			if (vars->map.map[i][j] != EMPTY_SPACE
-				&& vars->map.map[i][j] != O_DOOR
-				&& !ft_strchr("NSEW", vars->map.map[i][j]))
+			if (vars->map.map[i][j] == C_DOOR)
+				ft_draw_square(vars->mlx.img.data, coor, minimap,
+					ft_create_trgb(0, 118, 84, 16));
+			else if (!ft_strchr("03NSEWC", vars->map.map[i][j]))
 				ft_draw_square(vars->mlx.img.data, coor, minimap,
 					ft_create_trgb(0, 60, 60, 60));
 			j ++;

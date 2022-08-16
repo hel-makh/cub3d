@@ -6,7 +6,7 @@
 /*   By: hel-makh <hel-makh@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/21 22:27:23 by hel-makh          #+#    #+#             */
-/*   Updated: 2022/08/10 13:30:42 by hel-makh         ###   ########.fr       */
+/*   Updated: 2022/08/15 21:53:58 by hel-makh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,12 +57,23 @@ void	ft_move_player(t_vars *vars)
 		return ;
 	new_pos.x = vars->player.pos.x
 		+ (vars->player.dir.x * vars->mlx.fspeed * SPEED);
-	if (!ft_strchr(WALLS, vars->map.map[(int)vars->player.pos.y][(int)new_pos.x]))
+	if (!ft_strchr(WALLS,
+			vars->map.map[(int)vars->player.pos.y][(int)new_pos.x]))
 		vars->player.pos.x = new_pos.x;
 	new_pos.y = vars->player.pos.y
 		+ (vars->player.dir.y * vars->mlx.fspeed * SPEED);
-	if (!ft_strchr(WALLS, vars->map.map[(int)new_pos.y][(int)vars->player.pos.x]))
+	if (!ft_strchr(WALLS,
+			vars->map.map[(int)new_pos.y][(int)vars->player.pos.x]))
 		vars->player.pos.y = new_pos.y;
+	if (vars->map.map[(int)vars->player.pos.y][(int)vars->player.pos.x]
+		== COLLECTIBLE)
+	{
+		vars->map.map[(int)vars->player.pos.y][(int)vars->player.pos.x]
+			= EMPTY_SPACE;
+		ft_play_sound(COIN_COLLECT);
+		ft_collectible_lstdel(&vars->map.collectibles,
+			vars->player.pos.x, vars->player.pos.y);
+	}
 }
 
 int	key_press(int keycode, t_vars *vars)

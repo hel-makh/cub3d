@@ -1,44 +1,44 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_door_lstfuncs.c                                 :+:      :+:    :+:   */
+/*   ft_collectible_lstfuncs.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hel-makh <hel-makh@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/02 23:37:49 by hel-makh          #+#    #+#             */
-/*   Updated: 2022/08/16 11:38:26 by hel-makh         ###   ########.fr       */
+/*   Created: 2022/08/14 20:59:51 by hel-makh          #+#    #+#             */
+/*   Updated: 2022/08/14 21:01:48 by hel-makh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-t_door	*ft_door_lstnew(int x, int y, int frame)
+t_col	*ft_collectible_lstnew(int x, int y)
 {
-	t_door	*element;
+	t_col	*element;
 
-	element = malloc (1 * sizeof(t_door));
+	element = malloc (1 * sizeof(t_col));
 	if (element == NULL)
 		return (NULL);
 	element->x = x;
 	element->y = y;
-	element->frame = frame;
+	element->frame = 1;
 	element->next = NULL;
 	return (element);
 }
 
-void	ft_door_lstadd_front(t_door **lst, t_door *new)
+void	ft_collectible_lstadd_front(t_col **lst, t_col *new)
 {
-	t_door	*holder;
+	t_col	*holder;
 
 	holder = *lst;
 	*lst = new;
 	(*lst)->next = holder;
 }
 
-void	ft_door_lstdel(t_door **lst, int x, int y)
+void	ft_collectible_lstdel(t_col **lst, int x, int y)
 {
-	t_door	*holder;
-	t_door	*prev_holder;
+	t_col	*holder;
+	t_col	*prev_holder;
 
 	holder = *lst;
 	prev_holder = *lst;
@@ -61,9 +61,9 @@ void	ft_door_lstdel(t_door **lst, int x, int y)
 	}
 }
 
-void	ft_door_lstclear(t_door **lst)
+void	ft_collectible_lstclear(t_col **lst)
 {
-	t_door	*holder;
+	t_col	*holder;
 
 	if (!lst)
 		return ;
