@@ -6,7 +6,7 @@
 /*   By: hel-makh <hel-makh@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/05 11:43:14 by hel-makh          #+#    #+#             */
-/*   Updated: 2022/08/16 11:38:36 by hel-makh         ###   ########.fr       */
+/*   Updated: 2022/08/16 14:31:43 by hel-makh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,6 +132,31 @@ typedef struct s_door {
 	struct s_door	*next;
 }	t_door;
 
+typedef struct s_content {
+	int	space;
+	int	wall;
+	int	player;
+}	t_content;
+
+typedef struct s_render {
+	double			degree;
+	double			angle;
+	t_coor			hit_wall;
+	int				direc;
+	double			dist;
+	t_dim			wall_dim;
+	double			wall_orig_height;
+	int				ty;
+	struct s_render	*next;
+}	t_render;
+
+typedef struct s_rend_spr {
+	t_coor	sc;
+	t_coor	col;
+	t_coor	tex;
+	t_dim	spr;
+}	t_rend_spr;
+
 typedef struct s_player {
 	t_coor	pos;
 	double	angle;
@@ -184,25 +209,6 @@ typedef struct s_vars {
 	t_map		map;
 	t_player	player;
 }	t_vars;
-
-typedef struct s_render {
-	double			degree;
-	double			angle;
-	t_coor			hit_wall;
-	int				direc;
-	double			dist;
-	t_dim			wall_dim;
-	double			wall_orig_height;
-	int				ty;
-	struct s_render	*next;
-}	t_render;
-
-typedef struct s_rend_spr {
-	t_coor	sc;
-	t_coor	col;
-	t_coor	tex;
-	t_dim	spr;
-}	t_rend_spr;
 
 /**************************[ Utils ]**************************/
 long		ft_get_current_time(void);
