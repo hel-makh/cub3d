@@ -6,7 +6,7 @@
 /*   By: hel-makh <hel-makh@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/06 18:28:42 by hel-makh          #+#    #+#             */
-/*   Updated: 2022/06/25 11:36:56 by hel-makh         ###   ########.fr       */
+/*   Updated: 2022/08/16 14:30:06 by hel-makh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,20 @@
 
 # include <stdlib.h>
 
+#define BUFFER_SIZE 42
+
+typedef struct s_list
+{
+	int				fd;
+	char			content[BUFFER_SIZE + 1];
+	struct s_list	*next;
+}	t_list;
+
+typedef struct s_index {
+	size_t	i;
+	size_t	j;
+	size_t	k;
+}	t_index;
 
 int		ft_max(int x, int y);
 int		ft_min(int x, int y);
