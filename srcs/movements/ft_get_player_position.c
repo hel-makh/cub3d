@@ -6,7 +6,7 @@
 /*   By: hel-makh <hel-makh@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/21 10:41:39 by hel-makh          #+#    #+#             */
-/*   Updated: 2022/08/15 21:58:55 by hel-makh         ###   ########.fr       */
+/*   Updated: 2022/08/16 11:41:39 by hel-makh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ void	ft_get_player_position(t_vars *vars)
 					ft_collectible_lstnew(j, i));
 			else if (vars->map.map[i][j] == O_DOOR)
 				ft_door_lstadd_front(&vars->map.doors,
-					ft_door_lstnew(j + 0.5, i + 0.5));
+					ft_door_lstnew(j, i, vars->map.door.frames - 1));
 			j ++;
 		}
 		i ++;

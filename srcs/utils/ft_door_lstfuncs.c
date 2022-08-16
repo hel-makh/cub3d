@@ -6,13 +6,13 @@
 /*   By: hel-makh <hel-makh@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/02 23:37:49 by hel-makh          #+#    #+#             */
-/*   Updated: 2022/08/05 02:12:11 by hel-makh         ###   ########.fr       */
+/*   Updated: 2022/08/16 11:38:26 by hel-makh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-t_door	*ft_door_lstnew(int x, int y)
+t_door	*ft_door_lstnew(int x, int y, int frame)
 {
 	t_door	*element;
 
@@ -21,7 +21,7 @@ t_door	*ft_door_lstnew(int x, int y)
 		return (NULL);
 	element->x = x;
 	element->y = y;
-	element->frame = 1;
+	element->frame = frame;
 	element->next = NULL;
 	return (element);
 }

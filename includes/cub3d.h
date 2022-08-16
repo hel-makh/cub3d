@@ -6,7 +6,7 @@
 /*   By: hel-makh <hel-makh@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/05 11:43:14 by hel-makh          #+#    #+#             */
-/*   Updated: 2022/08/15 21:55:41 by hel-makh         ###   ########.fr       */
+/*   Updated: 2022/08/16 11:38:36 by hel-makh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -220,7 +220,7 @@ void		ft_collectible_lstdel(t_col **lst, int x, int y);
 void		ft_collectible_lstclear(t_col **lst);
 int			ft_collectible_frame(t_col *lst, int x, int y);
 
-t_door		*ft_door_lstnew(int x, int y);
+t_door		*ft_door_lstnew(int x, int y, int frame);
 void		ft_door_lstadd_front(t_door **lst, t_door *new);
 void		ft_door_lstdel(t_door **lst, int x, int y);
 void		ft_door_lstclear(t_door **lst);
