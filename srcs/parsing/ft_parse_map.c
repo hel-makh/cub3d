@@ -3,20 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_parse_map.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ybensell <ybensell@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hel-makh <hel-makh@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/07 13:48:05 by hel-makh          #+#    #+#             */
-/*   Updated: 2022/08/12 17:00:27 by ybensell         ###   ########.fr       */
+/*   Updated: 2022/08/16 14:31:24 by hel-makh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
-
-typedef struct s_content {
-	int	space;
-	int	wall;
-	int	player;
-}	t_content;
 
 static int	ft_read_map(t_map *map, int fd)
 {
