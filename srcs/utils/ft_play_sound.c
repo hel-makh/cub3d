@@ -6,7 +6,7 @@
 /*   By: hel-makh <hel-makh@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 09:44:02 by hel-makh          #+#    #+#             */
-/*   Updated: 2022/08/16 23:40:07 by hel-makh         ###   ########.fr       */
+/*   Updated: 2022/08/25 11:54:21 by hel-makh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	ft_play_sound(char *path)
 			argv[2] = ft_strdup(path);
 			argv[3] = NULL;
 		# elif defined(__APPLE__) && defined(__MACH__)
-			argv[0] = ft_strdup("/usr/bin/aplay");
+			argv[0] = ft_strdup("/usr/bin/afplay");
 			argv[1] = ft_strdup(path);
 			argv[2] = NULL;
 		# endif
