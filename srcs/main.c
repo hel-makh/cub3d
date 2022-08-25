@@ -6,7 +6,7 @@
 /*   By: hel-makh <hel-makh@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/05 11:49:49 by hel-makh          #+#    #+#             */
-/*   Updated: 2022/08/07 20:58:56 by hel-makh         ###   ########.fr       */
+/*   Updated: 2022/08/25 11:50:59 by hel-makh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,9 @@ static void	ft_start_game(t_vars *vars)
 		printf("Error\nCouldn't open window.\n");
 		ft_exit_game(vars, EXIT_FAILURE);
 	}
+	vars->player.move.x = 0;
+	vars->player.move.x = 0;
+	vars->player.rotate = 0;
 	# if defined(__linux__)
 		mlx_mouse_hide(vars->mlx.mlx, vars->mlx.win);
 	# elif defined(__APPLE__) && defined(__MACH__)

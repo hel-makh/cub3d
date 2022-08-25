@@ -6,7 +6,7 @@
 /*   By: hel-makh <hel-makh@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/21 22:27:23 by hel-makh          #+#    #+#             */
-/*   Updated: 2022/08/15 21:53:58 by hel-makh         ###   ########.fr       */
+/*   Updated: 2022/08/25 11:51:33 by hel-makh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ void	ft_move_player(t_vars *vars)
 	t_coor	new_pos;
 
 	ft_get_player_direction(vars);
-	if (!vars->player.move.x && !vars->player.move.y)
+	if (!(int)vars->player.move.x && !(int)vars->player.move.y)
 		return ;
 	new_pos.x = vars->player.pos.x
 		+ (vars->player.dir.x * vars->mlx.fspeed * SPEED);
