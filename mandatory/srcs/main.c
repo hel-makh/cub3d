@@ -6,7 +6,7 @@
 /*   By: hel-makh <hel-makh@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/05 11:49:49 by hel-makh          #+#    #+#             */
-/*   Updated: 2022/08/25 11:50:59 by hel-makh         ###   ########.fr       */
+/*   Updated: 2022/08/25 14:41:44 by hel-makh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,16 +40,10 @@ static void	ft_start_game(t_vars *vars)
 		ft_exit_game(vars, EXIT_FAILURE);
 	}
 	vars->player.move.x = 0;
-	vars->player.move.x = 0;
+	vars->player.move.y = 0;
 	vars->player.rotate = 0;
-	# if defined(__linux__)
-		mlx_mouse_hide(vars->mlx.mlx, vars->mlx.win);
-	# elif defined(__APPLE__) && defined(__MACH__)
-		mlx_mouse_hide();
-	# endif
 	mlx_hook(vars->mlx.win, 02, (1L << 0), key_press, vars);
 	mlx_hook(vars->mlx.win, 03, (1L << 1), key_release, vars);
-	mlx_hook(vars->mlx.win, 06, (1L << 6), mouse_rotation, vars);
 	mlx_hook(vars->mlx.win, 17, 0L, exit_game, vars);
 	mlx_loop_hook(vars->mlx.mlx, frame_rendering, vars);
 	mlx_loop(vars->mlx.mlx);

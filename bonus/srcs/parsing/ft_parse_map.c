@@ -6,7 +6,7 @@
 /*   By: hel-makh <hel-makh@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/07 13:48:05 by hel-makh          #+#    #+#             */
-/*   Updated: 2022/08/16 14:31:24 by hel-makh         ###   ########.fr       */
+/*   Updated: 2022/08/25 15:48:10 by hel-makh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,14 +43,12 @@ static int	ft_read_map(t_map *map, int fd)
 
 static int	ft_check_component(t_map *map, int i, int j, t_content *content)
 {
-	if (!ft_strchr(" 0123NSEWC", map->map[i][j]))
+	if (!ft_strchr(" 01NSEW", map->map[i][j]))
 	{
 		printf("Error\nInvalid map: Invalid component [%c]."
 			"\nLine: %d, Column: %d\n", map->map[i][j], i + 1, j + 1);
 		return (0);
 	}
-	if (map->map[i][j] == EMPTY_SPACE)
-		content->space ++;
 	else if (map->map[i][j] == WALL)
 		content->wall ++;
 	else if (map->map[i][j] == P_NORTH || map->map[i][j] == P_SOUTH
@@ -65,7 +63,6 @@ static int	ft_check_map_content(t_map *map)
 	int			i;
 	int			j;
 
-	content.space = 0;
 	content.wall = 0;
 	content.player = 0;
 	i = 0;
@@ -77,12 +74,12 @@ static int	ft_check_map_content(t_map *map)
 				return (0);
 		i ++;
 	}
-	if (!content.space)
-		return (printf("Error\nInvalid map: No valid path.\n"), 0);
-	else if (!content.wall)
+	if (!content.wall)
 		return (printf("Error\nInvalid map: Map not closed.\n"), 0);
-	else if (content.player != 1)
+	else if (content.player < 1)
 		return (printf("Error\nInvalid map: Missing player.\n"), 0);
+	else if (content.player > 1)
+		return (printf("Error\nInvalid map: Too many players.\n"), 0);
 	return (1);
 }
 

@@ -6,7 +6,7 @@
 /*   By: hel-makh <hel-makh@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/26 11:04:10 by hel-makh          #+#    #+#             */
-/*   Updated: 2022/08/15 22:16:56 by hel-makh         ###   ########.fr       */
+/*   Updated: 2022/08/16 15:22:05 by hel-makh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,9 +50,9 @@ static void
 		img = &vars->map.south;
 	else if (render->direc == 'v'
 		&& (render->angle < M_PI_2 || render->angle > M_PI + M_PI_2))
-		img = &vars->map.east;
-	else
 		img = &vars->map.west;
+	else
+		img = &vars->map.east;
 	color = ft_get_texture_pixel(*img, render);
 	if (color != ft_create_trgb(255, 0, 0, 0))
 		vars->mlx.img.data[y * WIDTH + x] = color;

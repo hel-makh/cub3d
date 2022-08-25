@@ -6,7 +6,7 @@
 /*   By: hel-makh <hel-makh@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/05 11:43:14 by hel-makh          #+#    #+#             */
-/*   Updated: 2022/08/16 14:31:43 by hel-makh         ###   ########.fr       */
+/*   Updated: 2022/08/25 15:47:54 by hel-makh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,9 @@
 # define USAGE			"Usage: ./cub3d <file.cub>"
 
 /**********************[ Sound Effects ]**********************/
-# define DOOR_OPEN		"sound/door_open.wav"
-# define DOOR_CLOSE		"sound/door_close.wav"
-# define COIN_COLLECT	"sound/coin_collect.wav"
+# define DOOR_OPEN		"bonus/sound/door_open.wav"
+# define DOOR_CLOSE		"bonus/sound/door_close.wav"
+# define COIN_COLLECT	"bonus/sound/coin_collect.wav"
 
 /************************[ Components ]***********************/
 # define SPACE			' '
@@ -133,7 +133,6 @@ typedef struct s_door {
 }	t_door;
 
 typedef struct s_content {
-	int	space;
 	int	wall;
 	int	player;
 }	t_content;

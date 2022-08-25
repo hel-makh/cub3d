@@ -6,27 +6,11 @@
 /*   By: hel-makh <hel-makh@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/21 22:27:23 by hel-makh          #+#    #+#             */
-/*   Updated: 2022/08/25 11:51:33 by hel-makh         ###   ########.fr       */
+/*   Updated: 2022/08/25 15:52:08 by hel-makh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
-
-int	mouse_rotation(int x, int y, t_vars *vars)
-{
-	double	diff;
-
-	(void)y;
-	diff = x - (WIDTH / 2);
-	vars->player.angle = ft_radian_operations(vars->player.angle,
-			diff * vars->mlx.fspeed * (MOUSE_ROT_SPEED / 200.0));
-	# if defined(__linux__)
-		mlx_mouse_move(vars->mlx.mlx, vars->mlx.win, WIDTH / 2, HEIGHT / 2);
-	# elif defined(__APPLE__) && defined(__MACH__)
-		mlx_mouse_move(vars->mlx.win, WIDTH / 2, HEIGHT / 2);
-	# endif
-	return (0);
-}
 
 static void	ft_get_player_direction(t_vars *vars)
 {
@@ -57,23 +41,12 @@ void	ft_move_player(t_vars *vars)
 		return ;
 	new_pos.x = vars->player.pos.x
 		+ (vars->player.dir.x * vars->mlx.fspeed * SPEED);
-	if (!ft_strchr(WALLS,
-			vars->map.map[(int)vars->player.pos.y][(int)new_pos.x]))
+	if (vars->map.map[(int)vars->player.pos.y][(int)new_pos.x] != "1")
 		vars->player.pos.x = new_pos.x;
 	new_pos.y = vars->player.pos.y
 		+ (vars->player.dir.y * vars->mlx.fspeed * SPEED);
-	if (!ft_strchr(WALLS,
-			vars->map.map[(int)new_pos.y][(int)vars->player.pos.x]))
+	if (vars->map.map[(int)new_pos.y][(int)vars->player.pos.x] != "1")
 		vars->player.pos.y = new_pos.y;
-	if (vars->map.map[(int)vars->player.pos.y][(int)vars->player.pos.x]
-		== COLLECTIBLE)
-	{
-		vars->map.map[(int)vars->player.pos.y][(int)vars->player.pos.x]
-			= EMPTY_SPACE;
-		ft_play_sound(COIN_COLLECT);
-		ft_collectible_lstdel(&vars->map.collectibles,
-			vars->player.pos.x, vars->player.pos.y);
-	}
 }
 
 int	key_press(int keycode, t_vars *vars)
@@ -90,8 +63,6 @@ int	key_press(int keycode, t_vars *vars)
 		vars->player.rotate = -1;
 	else if (keycode == KEY_RIGHT)
 		vars->player.rotate = 1;
-	else if (keycode == KEY_E)
-		ft_open_close_door(vars);
 	else if (keycode == KEY_ESC)
 		ft_exit_game(vars, EXIT_SUCCESS);
 	return (0);
