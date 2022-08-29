@@ -6,7 +6,7 @@
 /*   By: hel-makh <hel-makh@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/07 13:48:05 by hel-makh          #+#    #+#             */
-/*   Updated: 2022/08/25 15:48:10 by hel-makh         ###   ########.fr       */
+/*   Updated: 2022/08/29 16:42:07 by hel-makh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ static int	ft_read_map(t_map *map, int fd)
 
 static int	ft_check_component(t_map *map, int i, int j, t_content *content)
 {
-	if (!ft_strchr(" 01NSEW", map->map[i][j]))
+	if (!ft_strchr(" 0123NSEWC", map->map[i][j]))
 	{
 		printf("Error\nInvalid map: Invalid component [%c]."
 			"\nLine: %d, Column: %d\n", map->map[i][j], i + 1, j + 1);
