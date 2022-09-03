@@ -6,7 +6,7 @@
 #    By: hel-makh <hel-makh@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/05 11:42:59 by hel-makh          #+#    #+#              #
-#    Updated: 2022/08/25 15:49:04 by hel-makh         ###   ########.fr        #
+#    Updated: 2022/09/03 21:52:37 by hel-makh         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -129,7 +129,7 @@ clean:
 					make clean -C $(LIBFT_DIR)
 
 fclean:				clean
-					rm -rf $(NAME) $(BONUS)
+					rm -rf $(NAME) $(NAME_BONUS)
 					make fclean -C $(LIBFT_DIR)
 					make clean -C $(MLX_DIR)
 
