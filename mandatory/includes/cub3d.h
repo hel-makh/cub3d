@@ -6,7 +6,7 @@
 /*   By: hel-makh <hel-makh@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/05 11:43:14 by hel-makh          #+#    #+#             */
-/*   Updated: 2022/08/25 15:50:53 by hel-makh         ###   ########.fr       */
+/*   Updated: 2022/09/03 21:50:31 by hel-makh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,21 @@
 # define HIT_WALLS		"1"
 
 /***********************[ Enumeration ]***********************/
+# if defined(__linux__)
+
+enum e_keycodes {
+	KEY_ESC = 65307,
+	KEY_A = 97,
+	KEY_W = 119,
+	KEY_D = 100,
+	KEY_S = 115,
+	KEY_LEFT = 65361,
+	KEY_UP = 65362,
+	KEY_RIGHT = 65363,
+	KEY_DOWN = 65364
+};
+
+# elif defined(__APPLE__) && defined(__MACH__)
 
 enum e_keycodes {
 	KEY_ESC = 53,
@@ -50,6 +65,8 @@ enum e_keycodes {
 	KEY_RIGHT = 124,
 	KEY_DOWN = 125
 };
+
+# endif
 
 enum e_window {
 	WIDTH = 850,
